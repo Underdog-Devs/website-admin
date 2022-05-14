@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 	prisma = new PrismaClient();
 } else {
 	/* global globalThis */
+	// eslint-disable-next-line no-undef
 	const globalWithPrisma = global as typeof globalThis & {
     prisma: PrismaClient;
   };
