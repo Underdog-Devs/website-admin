@@ -66,19 +66,10 @@
 		"react/jsx-props-no-spreading": "off",
 		"no-tabs": "off",
 		"no-empty-pattern": "off",
-		"indent": [
-			"error",
-			"tab"
-		],
+		"indent": ["error", "tab"],
 		"no-param-reassign": 0,
-		"react/jsx-indent": [
-			"error",
-			"tab"
-		],
-		"react/jsx-indent-props": [
-			"error",
-			"tab"
-		],
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-indent-props": ["error", "tab"],
 		"object-curly-newline": "off",
 		"react/jsx-one-expression-per-line": "off",
 		"max-len": "off",
