@@ -59,8 +59,8 @@ function PasswordForm(props: Props) {
 		}
 	};
 
-	const toggleMessage = (type: string, msg: string | null) => {
-		setMessage({ type, msg });
+	const toggleMessage = (type: string, msg: string) => {
+		setMessage({ type, message: msg });
 		setTimeout(() => {
 			setMessage(null);
 		}, 10000);
