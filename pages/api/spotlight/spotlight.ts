@@ -5,17 +5,17 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	const { id } = req.body;
 
 	try {
-		const post = await prisma.spotlight.delete({
+		const spotlight = await prisma.spotlight.findUnique({
 			where: {
 				id,
 			},
 		});
-		if (post) {
-			res.status(201).json({ message: 'Spotlight Successfully Deleted' });
+		if (spotlight) {
+			res.status(201).json({ spotlight });
 		}
 	} catch (e) {
 		res.status(500);
-		res.json({ error: 'Internal Server Error Deleting A User' });
+		res.json({ error: 'Internal Server Error Requesting A Spotlight' });
 	} finally {
 		await prisma.$disconnect();
 	}
