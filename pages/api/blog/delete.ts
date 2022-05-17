@@ -15,7 +15,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 		}
 	} catch (e) {
 		res.status(500);
-		res.json({ error: 'Internal Server Error Deleting A User' });
+		res.json({ error: 'Internal Server Error Deleting A Post' });
 	} finally {
 		await prisma.$disconnect();
 	}
