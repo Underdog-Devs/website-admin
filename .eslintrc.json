@@ -18,6 +18,9 @@
 		"guard-for-in": "off",
 		"no-restricted-syntax": "off",
 		"consistent-return": "off",
+		"import/no-mutable-exports": "off",
+		"no-param-reassign": 0,
+		"func-names": "off",
 		"array-callback-return": "off",
         "react/function-component-definition": [
         2,
