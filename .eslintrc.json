@@ -1,5 +1,8 @@
 {
-	"extends": ["next/core-web-vitals", "airbnb"],
+	"extends": [
+		"next/core-web-vitals",
+		"airbnb"
+	],
 	"rules": {
 		"react/prop-types": "off",
 		"no-plusplus": "off",
@@ -21,20 +24,32 @@
 		"consistent-return": "off",
 		"func-names": "off",
 		"array-callback-return": "off",
-        "react/function-component-definition": [
-        2,
-            {
-                "namedComponents": "function-declaration"
-            }
-        ],
+		"react/function-component-definition": [
+			2,
+			{
+				"namedComponents": "function-declaration"
+			}
+		],
 		"jsx-a11y/label-has-associated-control": "off",
 		"import/no-extraneous-dependencies": "off",
 		"no-await-in-loop": "off",
 		"radix": "off",
-		"semi": ["error", "always"],
-		"semi-style": ["error", "last"],
-		"quotes": ["error", "single"],
-		"jsx-quotes": ["error", "prefer-double"],
+		"semi": [
+			"error",
+			"always"
+		],
+		"semi-style": [
+			"error",
+			"last"
+		],
+		"quotes": [
+			"error",
+			"single"
+		],
+		"jsx-quotes": [
+			"error",
+			"prefer-double"
+		],
 		"import/export": 0,
 		"import/extensions": [
 			"error",
@@ -51,10 +66,19 @@
 		"react/jsx-props-no-spreading": "off",
 		"no-tabs": "off",
 		"no-empty-pattern": "off",
-		"indent": ["error", "tab"],
+		"indent": [
+			"error",
+			"tab"
+		],
 		"no-param-reassign": 0,
-		"react/jsx-indent": ["error", "tab"],
-		"react/jsx-indent-props": ["error", "tab"],
+		"react/jsx-indent": [
+			"error",
+			"tab"
+		],
+		"react/jsx-indent-props": [
+			"error",
+			"tab"
+		],
 		"object-curly-newline": "off",
 		"react/jsx-one-expression-per-line": "off",
 		"max-len": "off",
@@ -62,6 +86,22 @@
 		"@next/next/no-img-element": "off",
 		"linebreak-style": "off",
 		"@next/next/no-document-import-in-page": "off",
-		"no-lonely-if": "off"
+		"no-lonely-if": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": [
+					"Link"
+				],
+				"specialLink": [
+					"hrefLeft",
+					"hrefRight"
+				],
+				"aspects": [
+					"invalidHref",
+					"preferButton"
+				]
+			}
+		]
 	}
 }
