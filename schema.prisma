@@ -40,7 +40,9 @@ model Spotlight {
 }
 
 model Blog {
-  id       String @id @default(cuid())
+  id       String   @id @default(cuid())
   authorId String
   entry    Json
+  date     DateTime @default(now())
+
 }
