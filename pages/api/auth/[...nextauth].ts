@@ -41,9 +41,11 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 				}
 				// Any object returned will be saved in `user` property of the JWT
 				// Password verification
-				const isValid = await verifyPassword(credentials?.password, user?.password);
-				if (!isValid) {
-					throw new Error('Invalid Credentials');
+				if (credentials?.password) {
+					const isValid = await verifyPassword(credentials?.password, user?.password);
+					if (!isValid) {
+						throw new Error('Invalid Credentials');
+					}
 				}
 				console.log('Success');
 				return user;
