@@ -28,7 +28,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 			},
 		});
 		if (spotlight) {
-			res.status(201).json({ message: 'Spotlight Created' });
+			res.status(201).json({ message: 'Spotlight Created', spotlight });
 		}
 	} catch (e) {
 		res.status(500);
