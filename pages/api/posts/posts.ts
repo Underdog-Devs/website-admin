@@ -5,7 +5,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const posts = await prisma.blog.findMany();
 		if (posts) {
-			res.status(201).json({ posts });
+			res.status(200).json({ posts });
 		}
 	} catch (e) {
 		res.status(500);
