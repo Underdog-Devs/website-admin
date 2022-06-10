@@ -5,7 +5,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const spotlight = await prisma.spotlight.findMany();
 		if (spotlight) {
-			res.status(201).json({ spotlight });
+			res.status(200).json({ spotlight });
 		}
 	} catch (e) {
 		res.status(500);
