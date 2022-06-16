@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import styles from './password-reset.module.scss';
 
 type Props = {
 	token: string;
@@ -67,29 +68,42 @@ function PasswordForm(props: Props) {
 	};
 
 	return (
-		<form className="container" onSubmit={submitHandler}>
-			<h3>Enter a new password</h3>
-			{message?.message && (
-				<span style={{ color: message.type }}>{message.message}</span>
-			)}
-			<div className="form-row">
-				<div>
-					<label htmlFor="new-password">New Password</label>
-					<input type="password" id="new-password" ref={newPasswordRef} />
-				</div>
-				<div>
-					<label htmlFor="confirm-password">Confirm Password</label>
-					<input
-						type="password"
-						id="confirm-password"
-						ref={confirmPasswordRef}
-					/>
-				</div>
+		<div className={styles.container}>
+			<img
+				className={styles.logoImage}
+				src="/images/underdogdevs-01.png"
+				alt="Underdog Devs Logo"
+				height={300}
+				width={300}
+				loading="lazy"
+			/>
+			<div className={styles.formContainer}>
+				<h4 className={styles.title}>Enter a New Password</h4>
+
+				<form className={styles.form} onSubmit={submitHandler}>
+					{message?.message && (
+						<span style={{ color: message.type }}>{message.message}</span>
+					)}
+					<div className={styles.formField}>
+						<input className={styles.formInput} type="password" id="new-password" ref={newPasswordRef} />
+						<label className={styles.formLabel} htmlFor="new-password">New Password</label>
+					</div>
+					<div className={styles.formField}>
+						<input
+							className={styles.formInput}
+							type="password"
+							id="confirm-password"
+							ref={confirmPasswordRef}
+						/>
+						<label className={styles.formLabel} htmlFor="confirm-password">Confirm Password</label>
+					</div>
+
+					<div className={styles.formActions}>
+						<button className={styles.formButton}>Submit New Password</button>
+					</div>
+				</form>
 			</div>
-			<div>
-				<button>Submit New Password</button>
-			</div>
-		</form>
+		</div>
 	);
 }
 

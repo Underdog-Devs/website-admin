@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { GetServerSideProps } from 'next';
-import PasswordReset from '../../../components/auth/password-reset';
+import PasswordReset from '../../../components/auth/reset/password-reset';
 
 export type User = {
 	id: string;
