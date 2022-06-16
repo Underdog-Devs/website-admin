@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './login.module.scss';
@@ -23,9 +24,17 @@ export function Login(props: Props) {
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handleSubmit = (e: React.SyntheticEvent) => {
+	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log(formData);
+		try {
+			const res = await axios.post('/api/auth/sendReset', {
+				email: formData.email,
+				password: formData.password,
+			});
+			console.log(res);
+		} catch (err) {
+			console.error(err);
+		}
 		setFormData(initialFormData);
 	};
 

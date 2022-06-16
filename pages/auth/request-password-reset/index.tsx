@@ -1,10 +1,11 @@
+import axios from 'axios';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from '../../../components/auth/login/login.module.scss';
 
 type Props = {}
 
-export function RequestPasswordReset(props: Props) {
+export default function RequestPasswordReset(props: Props) {
 	const { } = props;
 	const [email, setEmail] = useState<string>('');
 
@@ -13,9 +14,16 @@ export function RequestPasswordReset(props: Props) {
 		setEmail(value);
 	};
 
-	const handleSubmit = (e: React.SyntheticEvent) => {
+	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log(email);
+		try {
+			const res = await axios.post('/api/auth/sendReset', {
+				email,
+			});
+			console.log(res);
+		} catch (err) {
+			console.error(err);
+		}
 		setEmail('');
 	};
 
