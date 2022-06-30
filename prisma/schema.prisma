@@ -37,6 +37,8 @@ model Spotlight {
   youtubeUrl   String?
   imageUrl     String
   about        String
+
+  @@map(name: "spotlight")
 }
 
 model Blog {
@@ -45,4 +47,5 @@ model Blog {
   entry    Json
   date     DateTime @default(now())
 
+  @@map(name: "blog")
 }
