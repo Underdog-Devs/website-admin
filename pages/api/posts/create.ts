@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import RenderResult from 'next/dist/server/render-result';
 import prisma from '../../../lib/prisma';
+import hasAuthour from '../../../middleware/hasAuthour';
 
-const handler = async(req: NextApiRequest, res: NextApiResponse) => {
-
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	console.log('Loookat meee inside creating a post!\n\n');
 	try {
 		const {authorId, entry} = req.body;
 
@@ -36,4 +37,4 @@ const handler = async(req: NextApiRequest, res: NextApiResponse) => {
 	}
 }
 
-export default handler;
+export default hasAuthour(handler);

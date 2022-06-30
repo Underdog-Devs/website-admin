@@ -7,6 +7,9 @@ const hasBlogId = (handler) => {
 					id:req.body.id
 				}
 			});
+			if(blogEntryExists === null || blogEntryExists === undefined){
+				throw "Blog Entrry Not Found";//Possibly make things like this into custom exceptions. Keepem in /utils or /lib?
+			}
 			console.log("Blog ID Eggsists: ");
 			console.log(JSON.stringify(blogEntryExists));
 
