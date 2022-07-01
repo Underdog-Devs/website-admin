@@ -1,0 +1,270 @@
+[33mcommit a3832fcb092f84f0ed4568b56977967c476ae3df[m[33m ([m[1;36mHEAD -> [m[1;32mal_post-edit-endpoint[m[33m)[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Thu Jun 30 19:16:23 2022 -0700
+
+    test commit
+
+[33mcommit 757021460d55c163faa63dbd7f1b526adb42777a[m[33m ([m[1;31morigin/al_post-edit-endpoint[m[33m)[m
+Merge: 8dcbbe7 5079cbf
+Author: thatoldplatitude <itsfirstnamedotlastname@tutanota.com>
+Date:   Thu Jun 30 20:05:16 2022 -0400
+
+    Merge branch 'feature/posts' into al_post-edit-endpoint
+    
+    Conflicts:
+            package-lock.json
+            package.json
+
+[33mcommit 5079cbf99850c1aa261e5efdca7219b876c2bdc4[m[33m ([m[1;31morigin/feature/posts[m[33m, [m[1;32mfeature/posts[m[33m)[m
+Author: thatoldplatitude <itsfirstnamedotlastname@tutanota.com>
+Date:   Thu Jun 30 18:12:48 2022 -0400
+
+    init migrations. consolidate prisma structure, moved schema.prisma to be under prisma/ with migrations
+
+[33mcommit 5938a7bfeff74500d9a59a208fd4c01863770edd[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Sun Jun 19 14:39:56 2022 -0700
+
+    Removed .env file
+
+[33mcommit 534e774103a36f090eaed4131138d4d0a9e1363f[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Fri Jun 17 17:08:49 2022 -0400
+
+    added testimonial upload page
+
+[33mcommit baef652d564f5f03ef5e80b4e72a69b2c7b6b377[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Fri Jun 17 17:08:40 2022 -0400
+
+    added spotlight upload page
+
+[33mcommit 8e53a63441d79190b5fd09ec0337ffff22c44824[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Fri Jun 17 17:07:39 2022 -0400
+
+    ported over reusable input comoponent
+
+[33mcommit d3ddc839d0751265063990866f9305e2a1235270[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Tue Jun 7 19:06:48 2022 -0400
+
+    lint
+
+[33mcommit 40c1ed3ebe8677d9ce5d20c80c52abe4862a839e[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Tue Jun 7 19:06:30 2022 -0400
+
+    adds spotlight upload page & installs react-icons
+
+[33mcommit 8dcbbe7103197bf2286434de159c63f09fcfd7df[m
+Author: Al <89033896+dandavisjs@users.noreply.github.com>
+Date:   Mon Jun 6 16:34:22 2022 -0700
+
+    Update edit.ts
+
+[33mcommit faed6e684a8e1b9dcfcb0644cb2e667f41515cfe[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Mon Jun 6 16:19:24 2022 -0700
+
+    Created a 'Edit post' endpoint
+
+[33mcommit ad216aa10401075e1063df2525829301fdd5a8f5[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Mon Jun 6 16:01:11 2022 -0700
+
+    Installed types for bcrypt, and fixed other minor type issue...
+
+[33mcommit 2ebb0d4ce62d985e2ec0a78c5e83b0916b2aa24e[m[33m ([m[1;32mal_nb-blog-single-post-endpoint[m[33m, [m[1;32mal_nb-blog-create-endpoint[m[33m)[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Mon Jun 6 16:01:11 2022 -0700
+
+    Installed types for bcrypt, and fixed other minor type issue...
+
+[33mcommit a90a434efa1bf5ab1a436779c607a548e89b10d3[m
+Merge: e8371f1 2e176e4
+Author: UnderdogDevsIntake <103703028+UnderdogDevsIntake@users.noreply.github.com>
+Date:   Sat Jun 4 18:49:16 2022 -0400
+
+    Merge pull request #9 from Underdog-Devs/al_login-page
+    
+    Added the login page
+
+[33mcommit 094dd0701c3521bcc004ee344c504ec217162d94[m
+Merge: f79024e 845ac82
+Author: UnderdogDevsIntake <103703028+UnderdogDevsIntake@users.noreply.github.com>
+Date:   Sat Jun 4 18:49:16 2022 -0400
+
+    Merge pull request #9 from Underdog-Devs/al_login-page
+    
+    Added the login page
+
+[33mcommit 2e176e4c24e12007b9dafd40c4b5a9c5f07c3a7c[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:34:15 2022 -0400
+
+    moved styles to login scss file
+
+[33mcommit 845ac822db56c5170dc989373c4b7f73d0280b8d[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:34:15 2022 -0400
+
+    moved styles to login scss file
+
+[33mcommit 92fe3b4d18ab069e850283a8fd49069bb784f201[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:34:06 2022 -0400
+
+    created request password reset component and page
+
+[33mcommit a4db773104429cb4323d772dccd42c347d78daf6[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:34:06 2022 -0400
+
+    created request password reset component and page
+
+[33mcommit 6109c3d9819daaa99086f7c5c35b200a0b2d88fd[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:33:49 2022 -0400
+
+    disabled eslint rule
+
+[33mcommit 8205cc3cd1ac5e5a9fd7a50cfc49b5a5ba10d16b[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:33:49 2022 -0400
+
+    disabled eslint rule
+
+[33mcommit 69c26e6591be7a2d8549a49f9c6de3b602024cd0[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:33:40 2022 -0400
+
+    moved login to components
+
+[33mcommit e0913b3f8fff6e59a604e1d084189586d4efe8bc[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 18:33:40 2022 -0400
+
+    moved login to components
+
+[33mcommit 6b95fc859871012183f88af92773641dfeee9af2[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:29:10 2022 -0400
+
+    brought in website-v2 image assets
+
+[33mcommit 81776b7905d600496c80157e0f3a872ad40d00c5[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:29:10 2022 -0400
+
+    brought in website-v2 image assets
+
+[33mcommit 38e5522fa9b751453e951499f1b9c85d2e6c02cb[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:28:49 2022 -0400
+
+    updated styles imports
+
+[33mcommit 39758423fd477ee3a9f8a40a5278cef891fa28ff[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:28:49 2022 -0400
+
+    updated styles imports
+
+[33mcommit 7d51bc626e7f9c5a79cb0b24c5aa297ee2d53bf7[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:28:38 2022 -0400
+
+    brought in webstie-v2 styles folder and files
+
+[33mcommit d79a75dd00b6b7325e93504c259f83b296314266[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:28:38 2022 -0400
+
+    brought in webstie-v2 styles folder and files
+
+[33mcommit f1d09d367e2362accd500b0ebf94406abc623216[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:27:59 2022 -0400
+
+    installed sass
+
+[33mcommit 5dd5a7702d0b8a335ed14945465814299bc4d265[m
+Author: Jess Bonanno <jbonanno@slack-corp.com>
+Date:   Sat Jun 4 17:27:59 2022 -0400
+
+    installed sass
+
+[33mcommit 89f6f9c8c192ae5443cb001152a633a6b6970e3c[m
+Merge: e08f47c e8371f1
+Author: Al <89033896+dandavisjs@users.noreply.github.com>
+Date:   Mon May 30 15:54:09 2022 -0700
+
+    Merge branch 'main' into al_login-page
+
+[33mcommit 318c6f8922c17d560f81f081aeed6bdce601c939[m
+Merge: e08f47c f79024e
+Author: Al <89033896+dandavisjs@users.noreply.github.com>
+Date:   Mon May 30 15:54:09 2022 -0700
+
+    Merge branch 'main' into al_login-page
+
+[33mcommit e08f47c91172ffff6c1edfb6e99bd98aed672a9e[m[33m ([m[1;31morigin/al_login-page[m[33m, [m[1;32mal_login-page[m[33m)[m
+Author: Al <dandavisjs@protonmail.com>
+Date:   Mon May 30 15:51:55 2022 -0700
+
+    Added the login page
+
+[33mcommit e8371f18b803c9332772a98cd80059363957fd36[m
+Merge: de30403 d1fceb0
+Author: Al <89033896+dandavisjs@users.noreply.github.com>
+Date:   Fri May 13 18:34:58 2022 -0700
+
+    Merge pull request #1 from Underdog-Devs/al_backend-nextauth
+    
+    Al backend nextauth
+
+[33mcommit f79024e8721aaec9020e40da9f7d508b521708e7[m
+Merge: de30403 41d543b
+Author: Al <89033896+dandavisjs@users.noreply.github.com>
+Date:   Fri May 13 18:34:58 2022 -0700
+
+    Merge pull request #1 from Underdog-Devs/al_backend-nextauth
+    
+    Al backend nextauth
+
+[33mcommit d1fceb0c123ed469ff32e7f33015313ab89c655b[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Fri May 13 17:57:25 2022 -0700
+
+    fixed 'global' eslint error
+
+[33mcommit 41d543bb51850fd1163f4e95c789c4b976719ef2[m[33m ([m[1;31morigin/al_backend-nextauth[m[33m, [m[1;32mal_backend-nextauth[m[33m)[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Fri May 13 17:57:25 2022 -0700
+
+    fixed 'global' eslint error
+
+[33mcommit fe457521be64a3ada259ead298b7fe3f0508e40d[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Fri May 13 17:38:45 2022 -0700
+
+    configured backend: next-auth and prisma
+
+[33mcommit 110595f6b5cd63c18e3deb6ee98d683280a8eadd[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Fri May 13 17:38:45 2022 -0700
+
+    configured backend: next-auth and prisma
+
+[33mcommit de30403fc8604cce2160843b6136d56a722ac641[m[33m ([m[1;32mal_nb-get-single-post[m[33m)[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Tue May 10 17:08:02 2022 -0700
+
+    setup husky precomit linter
+
+[33mcommit 089d463b7da36ad28923255eb4df1fda176e4660[m
+Author: unknown <dandavisjs@protonmail.com>
+Date:   Tue May 10 17:01:05 2022 -0700
+
+    Installed next and eslit
