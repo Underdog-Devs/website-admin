@@ -15,7 +15,7 @@ interface PasswordData {
 
 interface Message {
 	type: string;
-	message: string;
+	msg: string;
 }
 
 function PasswordForm(props: Props) {
@@ -59,7 +59,7 @@ function PasswordForm(props: Props) {
 		}
 	};
 
-	const toggleMessage = (type: string, msg: string | null) => {
+	const toggleMessage = (type: string, msg: string) => {
 		setMessage({ type, msg });
 		setTimeout(() => {
 			setMessage(null);
@@ -69,8 +69,8 @@ function PasswordForm(props: Props) {
 	return (
 		<form className="container" onSubmit={submitHandler}>
 			<h3>Enter a new password</h3>
-			{message?.message && (
-				<span style={{ color: message.type }}>{message.message}</span>
+			{message?.msg && (
+				<span style={{ color: message.type }}>{message.msg}</span>
 			)}
 			<div className="form-row">
 				<div>
