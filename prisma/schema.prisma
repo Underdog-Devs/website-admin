@@ -44,5 +44,4 @@ model Blog {
   authorId String
   entry    Json
   date     DateTime @default(now())
-
 }
