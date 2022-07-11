@@ -1,0 +1,11 @@
+@import '../../styles/globals.scss';
+
+.container {
+	padding: $space_xl;
+
+	.list {
+		li {
+			margin: $space_sm 0;
+		}
+	}
+}
