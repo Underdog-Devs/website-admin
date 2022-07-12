@@ -17,11 +17,14 @@ const initialFormData = {
 
 export function Login(props: Props) {
 	const { } = props;
-	const [formData, setFormData] = useState<FormData>(initialFormData);
+	const [credentials, setCredentials] = useState<FormData>({
+		email: '',
+		password: '',
+	});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+	const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setCredentials({ ...credentials, [name]: value });
 	};
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -60,8 +63,8 @@ export function Login(props: Props) {
 							type="email"
 							name="email"
 							id="email"
-							value={formData.email}
-							onChange={handleChange}
+							value={credentials.email}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="email">Email</label>
 					</div>
@@ -71,8 +74,8 @@ export function Login(props: Props) {
 							type="password"
 							name="password"
 							id="password"
-							value={formData.password}
-							onChange={handleChange}
+							value={credentials.password}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="password">Password</label>
 					</div>
