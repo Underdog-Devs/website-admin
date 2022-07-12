@@ -11,7 +11,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 			},
 		});
 		if (post) {
-			res.status(201).json({ post });
+			res.status(200).json({ post });
 		}
 	} catch (e) {
 		res.status(500);
