@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './login.module.scss';
@@ -16,17 +17,29 @@ const initialFormData = {
 
 export function Login(props: Props) {
 	const { } = props;
-	const [formData, setFormData] = useState<FormData>(initialFormData);
+	const [credentials, setCredentials] = useState<FormData>({
+		email: '',
+		password: '',
+	});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+	const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setCredentials({ ...credentials, [name]: value });
 	};
 
-	const handleSubmit = (e: React.SyntheticEvent) => {
+	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log(formData);
-		setFormData(initialFormData);
+		console.log('submitting');
+		const res = await signIn('credentials', {
+			redirect: true,
+			email: credentials.email,
+			password: credentials.password,
+			callbackUrl: '/dashboard',
+		});
+		setCredentials({
+			email: '',
+			password: '',
+		})
 	};
 
 	return (
@@ -48,8 +61,8 @@ export function Login(props: Props) {
 							type="email"
 							name="email"
 							id="email"
-							value={formData.email}
-							onChange={handleChange}
+							value={credentials.email}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="email">Email</label>
 					</div>
@@ -59,8 +72,8 @@ export function Login(props: Props) {
 							type="password"
 							name="password"
 							id="password"
-							value={formData.password}
-							onChange={handleChange}
+							value={credentials.password}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="password">Password</label>
 					</div>
