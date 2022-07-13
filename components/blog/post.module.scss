@@ -1,0 +1,33 @@
+@import '../../styles/globals.scss';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: $space-xs;
+	background-color: rgb(250, 250, 250);
+	padding: $space-xs;
+	border-radius: $space-sm;
+	font-family: $primaryTextFont;
+	h3 {
+		font-size: $space-md;
+	}
+	a {
+		color: $textBlack;
+	}
+	p {
+		line-height: $space-md;
+	}
+	.nav {
+		display: flex;
+		gap: $space-xs;
+		p{
+			font-size: $space-sm;
+		}
+		ul{
+			display: flex;
+			gap: $space-md;
+			font-size: $space-sm;
+		}
+	}
+}
+

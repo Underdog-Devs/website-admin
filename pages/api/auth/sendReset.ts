@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-	console.log(req.body);
 	const { email } = req.body;
 	const { sign } = jwt;
 	// Sign the token with JWT

@@ -29,12 +29,11 @@ export function Login(props: Props) {
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log('submitting');
 		const res = await signIn('credentials', {
-			redirect: true,
+			redirect: false,
 			email: credentials.email,
 			password: credentials.password,
-			callbackUrl: '/dashboard',
+			callbackUrl: '/',
 		});
 		if (res) {
 			setCredentials({
@@ -46,14 +45,6 @@ export function Login(props: Props) {
 
 	return (
 		<div className={styles.container}>
-			<img
-				className={styles.logoImage}
-				src="/images/underdogdevs-01.png"
-				alt="Underdog Devs Logo"
-				height={300}
-				width={300}
-				loading="lazy"
-			/>
 			<div className={styles.formContainer}>
 				<h4 className={styles.title}>Login</h4>
 				<form className={styles.form} onSubmit={handleSubmit}>

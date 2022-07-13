@@ -2,10 +2,8 @@
 
 .container {
 	padding: $space_xl;
-
-	.list {
-		li {
-			margin: $space_sm 0;
-		}
-	}
+	display: grid;
+	grid-template-columns: 1fr 1fr 180px;
+	gap: 20px;
+	
 }
