@@ -57,6 +57,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 			if (user) {
 				return {
 					...token,
+					userType: user.userType,
 					id: user.id,
 				};
 			}
@@ -69,6 +70,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 
 			// return session2;
 			session.accessToken = token.accessToken;
+			session.userType = token.userType;
 			return session;
 		},
 	},

@@ -28,7 +28,6 @@ export default Dashboard;
 export async function getServerSideProps(context: any) {
 	const session = await getSession({ req: context.req });
 	// Redirect if user isn't logged in
-	console.log({'dash': session})
 	if (!session) {
 		return {
 			redirect: {
@@ -39,7 +38,8 @@ export async function getServerSideProps(context: any) {
 	}
 
 	return {
-		props: { session },
-
+		props: {
+			session,
+		},
 	};
 }
