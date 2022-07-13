@@ -10,10 +10,10 @@ type FormData = {
 	password: string;
 }
 
-const initialFormData = {
-	email: '',
-	password: '',
-};
+// const initialFormData = {
+// 	email: '',
+// 	password: '',
+// };
 
 export function Login(props: Props) {
 	const { } = props;
