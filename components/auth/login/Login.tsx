@@ -10,10 +10,10 @@ type FormData = {
 	password: string;
 }
 
-const initialFormData = {
-	email: '',
-	password: '',
-};
+// const initialFormData = {
+// 	email: '',
+// 	password: '',
+// };
 
 export function Login(props: Props) {
 	const { } = props;
@@ -36,10 +36,12 @@ export function Login(props: Props) {
 			password: credentials.password,
 			callbackUrl: '/dashboard',
 		});
-		setCredentials({
-			email: '',
-			password: '',
-		})
+		if (res) {
+			setCredentials({
+				email: '',
+				password: '',
+			});
+		}
 	};
 
 	return (
