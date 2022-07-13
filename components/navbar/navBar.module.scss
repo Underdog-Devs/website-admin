@@ -1,5 +1,132 @@
 @import '../../styles/globals.scss';
 
 .container {
+  background-color: $udDarkGrey;
+  display: flex;
+  max-height: 100px;
+  padding-right: $space-md;
+	color: $udOrange;
+	font-family: $linkFont;
+	font-size: min(max(14px, 1.5vw), 16px);
 	
+	p {
+		cursor: default;
+	}
+
+  .desktopNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navToggle {
+    display: none;
+  }
+
+  .mobileNav {
+    display: none;
+  }
+
+  .image {
+    cursor: pointer;
+    margin-left: $space-xl;
+		height: 45px;
+		width: 160px;
+		padding: 30px 0;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+  }
+
+  .navigationLinks {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    a {
+      font-family: $linkFont;
+      font-size: min(max(14px, 1.5vw), 16px);
+      color: $udOrange;
+      text-decoration: none;
+			cursor: pointer;
+      padding: 0 $space-xs;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .container {
+    .desktopNav {
+      display: none;
+    }
+
+    .mobileNav {
+      display: block;
+      width: 100%;
+    }
+
+    .navHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.125em 1em;
+      position: relative;
+      .image {
+        margin: 0;
+      }
+    }
+
+    .navToggle {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 1.5rem;
+      color: $udOrange;
+      background: transparent;
+      border-color: transparent;
+      transition: $nav-transition;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: $udSecondaryOrange;
+      }
+    }
+
+    .mobileNavigation {
+      height: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: $udDarkGrey;
+      transition: $nav-transition;
+      a, p {
+        font-family: $linkFont;
+        color: $udOrange;
+        text-decoration: none;
+        margin: 0.35rem 0;
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

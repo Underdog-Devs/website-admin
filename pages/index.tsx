@@ -1,12 +1,20 @@
 import React from 'react';
+import { useSession } from 'next-auth/react';
 import { Login } from '../components/auth/login';
 import styles from './index.module.scss';
+import Dashboard from '../components/dashboard';
 
 function Home() {
+	const { data: session } = useSession();
 	return (
-		<div className={styles.appContainer}>
-			<Login />
-		</div>
+		(session
+			? <Dashboard />
+			:			(
+				<div className={styles.login}>
+					<Login />
+				</div>
+			))
+
 	);
 }
 
