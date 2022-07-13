@@ -2,6 +2,7 @@ import React from 'react';
 import { getSession } from 'next-auth/react';
 import { Login } from '../components/auth/login';
 import styles from './index.module.scss';
+import Dashboard from '../components/dashboard';
 
 function Home() {
 	return (
