@@ -1,0 +1,10 @@
+@import '../../styles/globals.scss';
+
+.list {
+
+	background-color: rgb(236, 236, 236);
+	padding: 15px;;
+	li {
+		margin: $space_sm 0;
+	}
+}
