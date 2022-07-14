@@ -4,7 +4,6 @@ import { Login } from '../components/auth/login';
 import styles from './index.module.scss';
 
 function Home() {
-	const { data: session } = useSession();
 	return (
 		<div className={styles.login}>
 			<Login />

@@ -38,34 +38,34 @@ function Dashboard(props: Props) {
 }
 
 export async function getServerSideProps(context: { req: any; }) {
-	const session = await getSession({ req: context.req });
-	// Redirect if user isn't logged in
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false,
-			},
-		};
-	} else {
-		// Fetch all posted jobs and include related items from Company table
-		const posts = await prisma.blog.findMany({
-			take: 3,
-			orderBy: [
-				{
-					date: 'desc',
-				},
-			],
-		});
-		return {
-			props: {
-				posts: posts.map((post) => ({
-					...post,
-					date: post.date.toISOString(),
-				})),
-			},
-		};
-	}
+  const session = await getSession({ req: context.req });
+  // Redirect if user isn't logged in
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } else {
+    // Fetch all posted jobs and include related items from Company table
+    const posts = await prisma.blog.findMany({
+      take: 3,
+      orderBy: [
+        {
+          date: 'desc',
+        },
+      ],
+    });
+    return {
+      props: {
+        posts: posts.map((post) => ({
+          ...post,
+          date: post.date.toISOString(),
+        })),
+      },
+    };
+  }
 };
 
 export default Dashboard;
