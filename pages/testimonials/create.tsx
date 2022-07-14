@@ -13,7 +13,7 @@ function CreateTestimonial() {
 			</section>
 			<section className={styles.rightCol}>
 				<div className={styles.back}>
-					<Link href="/">
+					<Link href="/dashboard">
 						<button className={styles.backButton}>
 							<FaChevronLeft /> Back{' '}
 						</button>

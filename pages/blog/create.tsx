@@ -14,7 +14,7 @@ function CreatePost() {
 			</section>
 			<section className={styles.rightCol}>
 				<div className={styles.back}>
-					<Link href="/" passHref>
+					<Link href="/dashboard" passHref>
 						<button className={styles.backButton}>
 							<FaChevronLeft /> Back{' '}
 						</button>

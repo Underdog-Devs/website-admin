@@ -4,6 +4,8 @@
 	display: grid;
 	grid-template-columns: 300px 1fr 180px;
 	margin-top: $space-lg;
+	max-width: 1200px;
+	margin: $space-lg auto 0 auto;
 
 	.leftCol {
 		display: flex;
