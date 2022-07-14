@@ -12,7 +12,7 @@ function Nav() {
 					<Link href="/blog/create"><a><FaPen />Create</a></Link>
 				</li>
 				<li>
-					<Link href="/blog/all"><a><FaEye />View All</a></Link>
+					<Link href="/blog/"><a><FaEye />View All</a></Link>
 				</li>
 			</div>
 			<div>
@@ -21,7 +21,7 @@ function Nav() {
 					<Link href="/spotlight/create"><a><FaPen />Create</a></Link>
 				</li>
 				<li>
-					<Link href="/spotlight/all"><a><FaEye />View All</a></Link>
+					<Link href="/spotlight/"><a><FaEye />View All</a></Link>
 				</li>
 			</div>
 			<div>
@@ -30,7 +30,7 @@ function Nav() {
 					<Link href="/testimonials/create"><a><FaPen />Create</a></Link>
 				</li>
 				<li>
-					<Link href="/testimonials/all"><a><FaEye />View All</a></Link>
+					<Link href="/testimonials/"><a><FaEye />View All</a></Link>
 				</li>
 			</div>
 		</ul>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import styles from './posts.module.scss';
 import Post from './post';
 
@@ -19,7 +18,6 @@ function Nav(props: Props) {
 			{posts?posts.map((post:singlePost) => (
 				<Post post={post} />
 			)):<div>loading</div>}
-			<Link href="/blog/"><a>More Posts...</a></Link>
 		</div>
 	);
 }
