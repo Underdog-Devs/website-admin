@@ -9,14 +9,11 @@
 		display: flex;
 		align-items: center;
 		padding: 0 $space-xl;
-		
-	background-color: #f2f5f8;
-	border: 1px solid #d8dde2;
-	padding: $space-md;
-	border-radius: $space-sm;
+		background-color: $menteeBlue;
 
 		.instruction {
 			font-size: $f4;
+			color: white;
 		}
 	}
 	.rightCol {
@@ -43,6 +40,12 @@
 				margin: $space-sm 0 $space-xs 0;
 				cursor: pointer;
 			}
+		}
+
+		.socialsContainer {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
 		}
 
 		.button {

@@ -18,10 +18,13 @@ function Dashboard() {
 		date: '07/14/2022' }];
 	return (
 		<div className={styles.container}>
-			<Posts posts={posts} />
-			<Posts posts={posts} />
-			<Nav />
-
+			<div className={styles.main}>
+				<Posts posts={posts} />
+				<Posts posts={posts} />
+			</div>
+			<div>
+				<Nav />
+			</div>
 		</div>
 	);
 }

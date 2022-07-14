@@ -47,7 +47,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 						throw new Error('Invalid Credentials');
 					}
 				}
-				console.log('Success');
 				return user;
 			},
 		}),
