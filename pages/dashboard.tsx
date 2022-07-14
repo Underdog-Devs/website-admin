@@ -1,11 +1,15 @@
 import React from 'react';
+import { PrismaClient } from '@prisma/client';
 import styles from './dashboard.module.scss';
-import Nav from './nav';
-import Posts from '../blog/posts';
+import Nav from '../components/dashboard/nav';
+import Posts from '../components/blog/posts';
 
-function Dashboard(props: any) {
+type Props = {
+	posts: any;
+}
+
+function Dashboard(props: Props) {
 	const { posts } = props;
-	console.log(posts);
 	// const posts = [{ title: 'Blog Title',
 	// 	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin auctor enim nec purus fermentum sodales. Donec sed varius arcu, volutpat pretium metus.',
 	// 	author: 'username',
@@ -21,14 +25,35 @@ function Dashboard(props: any) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.main}>
-				<Posts posts={posts} />
-				<Posts posts={posts} />
+				<Posts posts={posts} title="Latest Posts" />
+				<Posts posts={posts} title="Latest Posts" />
 			</div>
 			<div>
 				<Nav />
 			</div>
 		</div>
 	);
+}
+
+export async function getServerSideProps() {
+	const prisma = new PrismaClient();
+	// Fetch all posted jobs and include related items from Company table
+	const posts = await prisma.blog.findMany({
+		take: 3,
+		orderBy: [
+			{
+				date: 'desc',
+			},
+		],
+	});
+	return {
+		props: {
+			posts: posts.map((post) => ({
+				...post,
+				date: post.date.toISOString(),
+			})),
+		},
+	};
 }
 
 export default Dashboard;

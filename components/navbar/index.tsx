@@ -25,7 +25,7 @@ function NavBar() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.desktopNav}>
-				<Link href="/" passHref>
+				<Link href="/dashboard" passHref>
 					<img
 						className={styles.image}
 						src="/images/underdogdevs-01-sm.png"

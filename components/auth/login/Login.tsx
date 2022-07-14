@@ -30,10 +30,10 @@ export function Login(props: Props) {
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		const res = await signIn('credentials', {
-			redirect: false,
+			redirect: true,
 			email: credentials.email,
 			password: credentials.password,
-			callbackUrl: '/',
+			callbackUrl: '/dashboard',
 		});
 		if (res) {
 			setCredentials({
