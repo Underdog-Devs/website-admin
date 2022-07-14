@@ -1,7 +1,8 @@
 @import '../../styles/globals.scss';
 
 .container {
-	background-color: rgb(236, 236, 236);
+	background-color: #f2f5f8;
+	border: 1px solid #d8dde2;
 	border-radius: $space-sm;
 	display: flex;
 	flex-direction: column;

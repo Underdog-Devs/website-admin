@@ -1,9 +1,14 @@
 @import '../../styles/globals.scss';
 
 .container {
-	padding: $space_xl;
 	display: grid;
-	grid-template-columns: 1fr 1fr 180px;
+	grid-template-columns: 1fr 180px;
 	gap: 20px;
-	
+	margin-top: $space-lg;
+
+}
+
+.main {
+	display: flex;
+	gap: 15px;
 }

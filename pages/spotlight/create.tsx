@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
+import Nav from '../../components/dashboard/nav';
 import { Input } from '../../components/input';
-import styles from './spotlightUpload.module.scss';
+import styles from './create.module.scss';
 
-function SpotlightUpload() {
+function CreateSpotlight() {
 	return (
 		<div className={styles.container}>
 			<section className={styles.leftCol}>
@@ -89,8 +90,11 @@ function SpotlightUpload() {
 					/>
 				</div>
 			</section>
+			<div>
+				<Nav />
+			</div>
 		</div>
 	);
 }
 
-export default SpotlightUpload;
+export default CreateSpotlight;
