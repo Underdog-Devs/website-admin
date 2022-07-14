@@ -14,6 +14,7 @@ model User {
   image        String?
   userType     String
   password     String
+	posts 			 Blog[]
   twitterUrl   String?
   facebookUrl  String?
   linkedinUrl  String?
@@ -40,8 +41,10 @@ model Spotlight {
 }
 
 model Blog {
-  id       String   @id @default(cuid())
-  authorId String
-  entry    Json
-  date     DateTime @default(now())
+  id       		String   		@id @default(cuid())
+	title				String
+  entry    		Json
+  author      User      	@relation(fields: [authorId], references: [id])
+  authorId    String
+  date    		DateTime 		@default(now())
 }

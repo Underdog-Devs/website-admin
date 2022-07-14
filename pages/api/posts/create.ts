@@ -2,11 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-	const { authorId, entry } = req.body;
+	const { authorId, entry, title } = req.body;
 
 	try {
 		const post = await prisma.blog.create({
 			data: {
+				title,
 				authorId,
 				entry,
 			},
