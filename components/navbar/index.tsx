@@ -27,7 +27,7 @@ function NavBar() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.desktopNav}>
-				<Link href="/" passHref>
+				<Link href="/dashboard" passHref>
 					<img
 						onClick={() => setShowLinks(false)}
 						className={styles.image}

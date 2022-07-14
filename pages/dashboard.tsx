@@ -1,9 +1,10 @@
 import React from 'react';
-import { PrismaClient } from '@prisma/client';
-import { getSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 import styles from './dashboard.module.scss';
 import Nav from '../components/dashboard/nav';
 import Posts from '../components/blog/posts';
+import prisma from '../lib/prisma';
+import { getSession } from 'next-auth/react';
 
 type Props = {
 	posts: any;
@@ -26,7 +27,7 @@ function Dashboard(props: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.main}>
-				<Posts posts={posts} title="Latest Posts" />
+				<div>test</div>
 				<Posts posts={posts} title="Latest Posts" />
 			</div>
 			<div>
@@ -46,25 +47,25 @@ export async function getServerSideProps(context: { req: any; }) {
 				permanent: false,
 			},
 		};
-	}
-	const prisma = new PrismaClient();
-	// Fetch all posted jobs and include related items from Company table
-	const posts = await prisma.blog.findMany({
-		take: 3,
-		orderBy: [
-			{
-				date: 'desc',
+	} else {
+		// Fetch all posted jobs and include related items from Company table
+		const posts = await prisma.blog.findMany({
+			take: 3,
+			orderBy: [
+				{
+					date: 'desc',
+				},
+			],
+		});
+		return {
+			props: {
+				posts: posts.map((post) => ({
+					...post,
+					date: post.date.toISOString(),
+				})),
 			},
-		],
-	});
-	return {
-		props: {
-			posts: posts.map((post) => ({
-				...post,
-				date: post.date.toISOString(),
-			})),
-		},
-	};
-}
+		};
+	}
+};
 
 export default Dashboard;
