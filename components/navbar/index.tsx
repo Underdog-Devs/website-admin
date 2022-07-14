@@ -27,7 +27,6 @@ function NavBar() {
 			<div className={styles.desktopNav}>
 				<Link href="/" passHref>
 					<img
-						onClick={() => setShowLinks(false)}
 						className={styles.image}
 						src="/images/underdogdevs-01-sm.png"
 						height={175}
