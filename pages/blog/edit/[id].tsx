@@ -2,11 +2,14 @@ import Link from 'next/link';
 import React from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { getSession } from 'next-auth/react';
+import { PrismaClient } from '@prisma/client';
 import Nav from '../../../components/dashboard/nav';
 import { Input } from '../../../components/input';
 import styles from './edit.module.scss';
 
-function EditPost() {
+function EditPost(props: any) {
+	const { post } = props;
+	console.log('single:', post);
 	return (
 		<div className={styles.container}>
 			<section className={styles.leftCol}>
@@ -47,6 +50,8 @@ function EditPost() {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
+	const { params } = context;
+	const prisma = new PrismaClient();
 	// Redirect if user isn't logged in
 	if (!session) {
 		return {
@@ -56,9 +61,19 @@ export async function getServerSideProps(context: { req: any; }) {
 			},
 		};
 	}
+	const post = await prisma.blog.findUnique({
+		where: {
+			id: params.id,
+		},
+	});
 
 	return {
-		props: { session },
+		props: {
+			post: {
+				...post,
+				date: post?.date.toISOString(),
+			},
+		},
 	};
 }
 

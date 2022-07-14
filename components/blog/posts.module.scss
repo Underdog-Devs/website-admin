@@ -8,6 +8,8 @@
 	flex-direction: column;
 	gap: 10px;
 	padding: 20px;
+	width: 100%;
+	box-sizing: border-box;
 	
 	h2 {
 		margin-left: $space-xs;
