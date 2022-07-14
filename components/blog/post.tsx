@@ -11,15 +11,15 @@ function Nav({ post }) {
 			<div className={styles.nav}>
 				<ul>
 					<li>
-						<Link href="/blog/edit/ID"><a>Edit</a></Link>
+						<Link href={`/blog/edit/${post.id}`}><a>Edit</a></Link>
 					</li>
 					<li>
-						<a href="https://www.underdogdevs.org">
+						<a href={`https://www.underdogdevs.org/blog/${post.id}`}>
 							Read More
 						</a>
 					</li>
 				</ul>
-				<p>Author: {post.author} | Date: {post.date}</p>
+				<p>Date: {post.date}</p>
 			</div>
 		</div>
 	);

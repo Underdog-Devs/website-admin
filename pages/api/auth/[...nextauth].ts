@@ -7,7 +7,7 @@ import prisma from '../../../lib/prisma';
 export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
 	secret: process.env.JWT_SECRET,
 	session: {
-		maxAge: 30,
+		maxAge: 300,
 		updateAge: 24,
 	},
 	providers: [
