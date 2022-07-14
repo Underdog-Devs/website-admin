@@ -4,17 +4,18 @@ import Post from './post';
 
 type Props = {
 	posts: any;
+	title: string;
 }
 
 type singlePost = {
 	id: string;
 }
 
-function Nav(props: Props) {
-	const { posts } = props;
+function Posts(props: Props) {
+	const { posts, title } = props;
 	return (
 		<div className={styles.container}>
-			<h2>Blog Posts</h2>
+			<h2>{title}</h2>
 			{posts?posts.map((post:singlePost) => (
 				<Post post={post} />
 			)):<div>loading</div>}
@@ -22,4 +23,4 @@ function Nav(props: Props) {
 	);
 }
 
-export default Nav;
+export default Posts;

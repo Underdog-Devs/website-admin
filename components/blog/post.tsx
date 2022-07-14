@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './post.module.scss';
 
-function Nav({ post }) {
+function Post({ post }) {
 	console.log(post);
 	return (
 		<div className={styles.container}>
@@ -25,4 +25,4 @@ function Nav({ post }) {
 	);
 }
 
-export default Nav;
+export default Post;

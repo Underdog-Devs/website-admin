@@ -9,7 +9,7 @@ function BlogPost(props: any) {
 	const { posts } = props;
 	return (
 		<div className={styles.container}>
-			<Posts posts={posts} />
+			<Posts posts={posts} title="Blog Posts" />
 			<Nav />
 		</div>
 	);
