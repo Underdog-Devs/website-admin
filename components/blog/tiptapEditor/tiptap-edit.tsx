@@ -19,8 +19,6 @@ import styles from './tiptap-edit.module.scss';
 import { RootContext } from '../../../state/RootContext';
 import { Input } from '../../input';
 
-
-
 type Props = {
 	session: any;
 }
@@ -173,7 +171,6 @@ function TipTapEdit(props: Props) {
 		}
 	};
 
-
 	const postBlog = async () => {
 		try {
 			const res = await axios.post('/api/blog/create-entry', { entry: editor?.getJSON(), user: session.user, title: blogTitle });
@@ -182,7 +179,7 @@ function TipTapEdit(props: Props) {
 			console.error(error);
 		}
 	};
-	
+
 	const saveBlog = () => {
 		setBlogData(editor?.getJSON());
 		postBlog();

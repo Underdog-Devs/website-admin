@@ -8,9 +8,8 @@ import { Input } from '../../components/input';
 import styles from './create.module.scss';
 import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
 
-
 function CreatePost() {
-	const {data: session} = useSession() ;
+	const { data: session } = useSession();
 
 	return (
 		<div className={styles.container}>
