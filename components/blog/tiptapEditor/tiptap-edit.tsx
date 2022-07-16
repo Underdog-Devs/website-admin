@@ -1,11 +1,11 @@
-import { useEditor, EditorContent, Editor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { useEditor, EditorContent, Editor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
-import Highlight from '@tiptap/extension-highlight'
-import Typography from '@tiptap/extension-typography'
-import Image from '@tiptap/extension-image'
-import TextAlign from '@tiptap/extension-text-align'
+import Highlight from '@tiptap/extension-highlight';
+import Typography from '@tiptap/extension-typography';
+import Image from '@tiptap/extension-image';
+import TextAlign from '@tiptap/extension-text-align';
 import { AiOutlineBold, AiOutlineItalic, AiOutlineStrikethrough, AiOutlineOrderedList, AiOutlineAlignLeft, AiOutlineAlignCenter, AiOutlineAlignRight, AiOutlineUndo, AiOutlineRedo } from 'react-icons/ai';
 import { BsCodeSlash, BsBlockquoteLeft, BsJustify, BsImage } from 'react-icons/bs';
 import { BiCodeBlock, BiParagraph } from 'react-icons/bi';
@@ -13,29 +13,28 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { VscHorizontalRule, VscNoNewline } from 'react-icons/vsc';
 import { FaHighlighter } from 'react-icons/fa';
-import styles from './tiptap-edit.module.scss';
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
 import { Session } from '@auth0/nextjs-auth0';
+import styles from './tiptap-edit.module.scss';
 import { RootContext } from '../../../state/RootContext';
+import { Input } from '../../input';
 
-
-// export async function getServerSideProps(context: any) {
-// 	const session = await getSession({ req: context.req });
-// 	// Redirect if user isn't logged in
-// 	if (!session) {
-// 		return {
-// 			redirect: {
-// 				destination: '/',
-// 				permanent: false,
-// 			},
-// 		};
-// 	}
-// 	return {
-// 		props: { session },
-// 	};
-// }
-
+export async function getServerSideProps(context: any) {
+	const session = await getSession({ req: context.req });
+	// Redirect if user isn't logged in
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false,
+			},
+		};
+	}
+	return {
+		props: { session },
+	};
+}
 
 type Props = {
 	session: Session;
@@ -44,10 +43,10 @@ type Props = {
 type MenuProps = {
 	editor: Editor | null;
 }
-const MenuBar = (props: MenuProps) => {
+function MenuBar(props: MenuProps) {
 	const { editor } = props;
 	if (!editor) {
-		return null
+		return null;
 	}
 
 	return (
@@ -161,15 +160,15 @@ const MenuBar = (props: MenuProps) => {
 				<FiRefreshCw />
 			</button>
 		</div>
-	)
+	);
 }
 
-
-const TipTapEdit = (props: Props) => {
+function TipTapEdit(props: Props) {
 	const { session } = props;
-	console.log({ session })
+	console.log({ session });
 	const [value, setValue] = useState('');
 	const { blogData, setBlogData } = useContext(RootContext);
+	const [blogTitle, setBlogTitle] = useState<string>('');
 
 	const editor = useEditor({
 		extensions: [
@@ -181,68 +180,55 @@ const TipTapEdit = (props: Props) => {
 				types: ['heading', 'paragraph'],
 			}),
 		],
-		// 		content: `
-		//       <h2>
-		//         Hi there,
-		//       </h2>
-		//       <p>
-		//         this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
-		//       </p>
-		//       <ul>
-		//         <li>
-		//           That’s a bullet list with one …
-		//         </li>
-		//         <li>
-		//           … or two list items.
-		//         </li>
-		//       </ul>
-		//       <p>
-		//         Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:
-		//       </p>
-		//       <pre><code class="language-css">body {
-		//   display: none;
-		// }</code></pre>
-		//       <p>
-		//         I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
-		//       </p>
-		//       <blockquote>
-		//         Wow, that’s amazing. Good work, boy! 👏
-		//         <br />
-		//         — Mom
-		//       </blockquote>
-		//     `,
-	})
+	});
 
 	const addImage = () => {
-		const url = window.prompt('URL')
+		const url = window.prompt('URL');
 
 		if (url) {
-			editor?.chain().focus().setImage({ src: url }).run()
+			editor?.chain().focus().setImage({ src: url }).run();
 		}
-	}
+	};
+
+	console.log(session);
 
 	const postBlog = async () => {
 		try {
-			const res = await axios.post('api/blog/create', { entry: editor?.getJSON(), user: { email: 'jessbonanno@gmail.com' } })
-			// const res = await axios.post('api/blog/create-entry', { entry: editor?.getJSON(), user: session.user })
-			console.log(res)
+			const res = await axios.post('/api/blog/create-entry', { entry: editor?.getJSON(), user: session.user, title: blogTitle });
+			console.log(res);
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		}
-	}
+		setBlogTitle('');
+	};
 
 	const saveBlog = () => {
 		setBlogData(editor?.getJSON());
 		postBlog();
-	}
+	};
 	const eraseBlog = () => {
 		setBlogData(null);
-		setValue('')
-	}
+		setValue('');
+	};
 
-	console.log(blogData)
+	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setBlogTitle(e.target.value);
+	};
+
+	console.log(blogTitle);
+
+	console.log(blogData);
 	return (
-		<div className={styles.content} >
+		<div className={styles.content}>
+			<Input labelFor="title" labelText="Title">
+				<input
+					id="title"
+					type="text"
+					onChange={onTitleChange}
+					value={blogTitle}
+				/>
+			</Input>
+
 			<MenuBar editor={editor} />
 			<div>
 				<button onClick={addImage} className={styles.editButton}>
@@ -254,7 +240,7 @@ const TipTapEdit = (props: Props) => {
 			<button onClick={postBlog}>Save</button>
 			<button onClick={eraseBlog}>Clear</button>
 		</div>
-	)
+	);
 }
 
 export default TipTapEdit;
