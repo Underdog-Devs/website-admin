@@ -16,9 +16,9 @@ function Posts(props: Props) {
 	return (
 		<div className={styles.container}>
 			<h2>{title}</h2>
-			{posts?posts.map((post:singlePost) => (
-				<Post post={post} />
-			)):<div>loading</div>}
+			{posts ? posts.map((post: singlePost, idx: number) => (
+				<Post post={post} key={idx} />
+			)) : <div>loading</div>}
 		</div>
 	);
 }

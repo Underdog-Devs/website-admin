@@ -2,8 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './post.module.scss';
 
-function Post({ post }) {
-	console.log(post);
+function Post(props: any) {
+	const { post } = props;
 	return (
 		<div className={styles.container}>
 			<h3>{post.title}</h3>

@@ -15,7 +15,7 @@ interface PasswordData {
 
 interface Message {
 	type: string;
-	message: string;
+	message: string | null;
 }
 
 function PasswordForm(props: Props) {
@@ -60,7 +60,7 @@ function PasswordForm(props: Props) {
 	};
 
 	const toggleMessage = (type: string, msg: string | null) => {
-		setMessage({ type, msg });
+		setMessage({ type, message: msg });
 		setTimeout(() => {
 			setMessage(null);
 		}, 10000);

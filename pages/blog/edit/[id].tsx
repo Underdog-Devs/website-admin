@@ -50,7 +50,7 @@ function EditPost(props: any) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
-	const { params } = context;
+	const { params } = context.req;
 	const prisma = new PrismaClient();
 	// Redirect if user isn't logged in
 	if (!session) {
