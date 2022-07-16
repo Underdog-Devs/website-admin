@@ -1,0 +1,91 @@
+.menu {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+}
+.editButton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: none;
+	font-size: 1.2rem;
+	padding: 5px;
+	color: #333333;
+	border-radius: 5px;
+	border: none;
+	font-weight: bold;
+
+	&:hover {
+		color: gray;
+		box-shadow: 0 0 3px black;
+	}
+}
+
+.content {
+	margin: 20px;
+
+	> * + * {
+    margin-top: 0.75em;
+  }
+
+	ul {
+		list-style: disc;
+	}
+
+	ol {
+		list-style: decimal;
+	}
+
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0D0D0D, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    margin: 2rem 0;
+  }
+
+
+	pre {
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+		color: white;
+		background: #333333;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+}
