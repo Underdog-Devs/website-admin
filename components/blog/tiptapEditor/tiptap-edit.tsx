@@ -12,16 +12,12 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { VscHorizontalRule, VscNoNewline } from 'react-icons/vsc';
 import { FaHighlighter } from 'react-icons/fa';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
 import { Session } from '@auth0/nextjs-auth0';
 import styles from './tiptap-edit.module.scss';
 import { RootContext } from '../../../state/RootContext';
 import { Input } from '../../input';
-
-type Props = {
-	session: any;
-}
 
 type MenuProps = {
 	editor: Editor | null;
@@ -146,10 +142,17 @@ function MenuBar(props: MenuProps) {
 	);
 }
 
+
+type Props = {
+	postToEdit?: any;
+}
+
+
 function TipTapEdit(props: Props) {
-	const { session } = props;
+	const { postToEdit } = props;
+	const { data: session } = useSession();
 	const { _, setBlogData } = useContext(RootContext);
-	const [blogTitle, setBlogTitle] = useState<string>('');
+	const [blogTitle, setBlogTitle] = useState<string>(postToEdit ? postToEdit.title : '');
 
 	const editor = useEditor({
 		extensions: [
@@ -161,6 +164,7 @@ function TipTapEdit(props: Props) {
 				types: ['heading', 'paragraph'],
 			}),
 		],
+		content: postToEdit.entry,
 	});
 
 	const addImage = () => {
@@ -173,7 +177,7 @@ function TipTapEdit(props: Props) {
 
 	const postBlog = async () => {
 		try {
-			const res = await axios.post('/api/blog/create-entry', { entry: editor?.getJSON(), user: session.user, title: blogTitle });
+			const res = await axios.post('/api/blog/create-entry', { entry: editor?.getJSON(), user: session?.user, title: blogTitle });
 			console.log(res);
 		} catch (error) {
 			console.error(error);

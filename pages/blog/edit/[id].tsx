@@ -1,18 +1,21 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
 import Nav from '../../../components/dashboard/nav';
 import { Input } from '../../../components/input';
 import styles from './edit.module.scss';
+import TipTapEdit from '../../../components/blog/tiptapEditor/tiptap-edit';
 
 function EditPost(props: any) {
+	const { data: session } = useSession();
 	const { post } = props;
 	console.log('single:', post);
 	return (
 		<div className={styles.container}>
-			<section className={styles.leftCol}>
+			<TipTapEdit postToEdit={post} />
+			{/* <section className={styles.leftCol}>
 				<p className={styles.instruction}>Instructions to upload mentee spotlight information.</p>
 			</section>
 			<section className={styles.rightCol}>
@@ -40,7 +43,7 @@ function EditPost(props: any) {
 				<div className={styles.sendButton}>
 					<input className={styles.button} type="submit" value="Send" />
 				</div>
-			</section>
+			</section> */}
 			<div>
 				<Nav />
 			</div>
@@ -50,7 +53,7 @@ function EditPost(props: any) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
-	const { params } = context.req;
+	const { params } = context;
 	const prisma = new PrismaClient();
 	// Redirect if user isn't logged in
 	if (!session) {
