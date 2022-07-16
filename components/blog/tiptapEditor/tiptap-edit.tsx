@@ -223,7 +223,7 @@ const TipTapEdit = (props: Props) => {
 
 	const postBlog = async () => {
 		try {
-			const res = await axios.post('api/blog/create-entry', { entry: editor?.getJSON(), user: { email: 'jessbonanno@gmail.com' } })
+			const res = await axios.post('api/blog/create', { entry: editor?.getJSON(), user: { email: 'jessbonanno@gmail.com' } })
 			// const res = await axios.post('api/blog/create-entry', { entry: editor?.getJSON(), user: session.user })
 			console.log(res)
 		} catch (error) {
