@@ -1,37 +1,20 @@
 import Link from 'next/link';
 import React from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { Session } from '@auth0/nextjs-auth0';
 import Nav from '../../components/dashboard/nav';
 import { Input } from '../../components/input';
 import styles from './create.module.scss';
 import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
 
-export async function GetServerSideProps(context: any) {
-	const session = await getSession({ req: context.req });
-	// Redirect if user isn't logged in
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false,
-			},
-		};
-	}
-	return {
-		props: { session },
-	};
-}
 
-type Props = {
-	session: Session;
-}
+function CreatePost() {
+	const {data: session} = useSession() ;
 
-function CreatePost(props: Props) {
 	return (
 		<div className={styles.container}>
-			<TipTapEdit session={props.session} />
+			<TipTapEdit session={session} />
 			{/* <section className={styles.leftCol}>
 				<p className={styles.instruction}>Instructions to upload mentee spotlight information.</p>
 			</section> */}

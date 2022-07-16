@@ -19,24 +19,10 @@ import styles from './tiptap-edit.module.scss';
 import { RootContext } from '../../../state/RootContext';
 import { Input } from '../../input';
 
-export async function getServerSideProps(context: any) {
-	const session = await getSession({ req: context.req });
-	// Redirect if user isn't logged in
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false,
-			},
-		};
-	}
-	return {
-		props: { session },
-	};
-}
+
 
 type Props = {
-	session: Session;
+	session: any;
 }
 
 type MenuProps = {
@@ -164,9 +150,7 @@ function MenuBar(props: MenuProps) {
 
 function TipTapEdit(props: Props) {
 	const { session } = props;
-	console.log({ session });
-	const [value, setValue] = useState('');
-	const { blogData, setBlogData } = useContext(RootContext);
+	const { _, setBlogData } = useContext(RootContext);
 	const [blogTitle, setBlogTitle] = useState<string>('');
 
 	const editor = useEditor({
@@ -189,7 +173,6 @@ function TipTapEdit(props: Props) {
 		}
 	};
 
-	console.log(session);
 
 	const postBlog = async () => {
 		try {
@@ -198,25 +181,22 @@ function TipTapEdit(props: Props) {
 		} catch (error) {
 			console.error(error);
 		}
-		setBlogTitle('');
 	};
-
+	
 	const saveBlog = () => {
 		setBlogData(editor?.getJSON());
 		postBlog();
+		setBlogTitle('');
+		setBlogData(null);
 	};
 	const eraseBlog = () => {
 		setBlogData(null);
-		setValue('');
 	};
 
 	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setBlogTitle(e.target.value);
 	};
 
-	console.log(blogTitle);
-
-	console.log(blogData);
 	return (
 		<div className={styles.content}>
 			<Input labelFor="title" labelText="Title">
