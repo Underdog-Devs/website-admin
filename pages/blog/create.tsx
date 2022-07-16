@@ -32,7 +32,6 @@ function CreatePost(props: Props) {
 	return (
 		<div className={styles.container}>
 			<TipTapEdit session={props.session} />
-
 			{/* <section className={styles.leftCol}>
 				<p className={styles.instruction}>Instructions to upload mentee spotlight information.</p>
 			</section> */}
@@ -48,7 +47,6 @@ function CreatePost(props: Props) {
 					<Input labelFor="title" labelText="Title">
 						<input id="title" type="text" />
 					</Input>
-
 				</div>
 				<div className={styles.sendButton}>
 					<input className={styles.button} type="submit" value="Send" />

@@ -4,6 +4,7 @@ import styles from './post.module.scss';
 
 function Post(props: any) {
 	const { post } = props;
+
 	return (
 		<div className={styles.container}>
 			<h3>{post.title}</h3>

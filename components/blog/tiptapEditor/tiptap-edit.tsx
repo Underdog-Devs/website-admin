@@ -1,6 +1,5 @@
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
