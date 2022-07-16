@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import Posts from '../../components/blog/posts';
 import Nav from '../../components/dashboard/nav';
 
-function BlogPost(props: any) {
+function BlogPosts(props: any) {
 	const { posts } = props;
 	return (
 		<div className={styles.container}>
@@ -35,6 +35,13 @@ export async function getServerSideProps(context: { req: any; }) {
 				date: 'desc',
 			},
 		],
+		include: {
+			author: {
+				select: {
+					email: true,
+				},
+			},
+		},
 	});
 	return {
 		props: {
@@ -45,4 +52,4 @@ export async function getServerSideProps(context: { req: any; }) {
 		},
 	};
 }
-export default BlogPost;
+export default BlogPosts;
