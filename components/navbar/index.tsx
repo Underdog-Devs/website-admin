@@ -1,11 +1,11 @@
-// import { useSession, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import styles from './navBar.module.scss';
 
 function NavBar() {
-	// const { data: session } = useSession();
+	const { data: session } = useSession();
 	const [showLinks, setShowLinks] = useState(false);
 	const linksContainerRef = useRef<HTMLElement | null>(null);
 	const toggleLinks = () => {
@@ -36,7 +36,7 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{/* {session && (<p>{session.email} | <a onClick={() => signOut()}>Sign Out</a></p>) } */}
+						{session && <button onClick={() => signOut()}>Sign Out</button> }
 					</div>
 
 				</nav>
@@ -62,7 +62,7 @@ function NavBar() {
 					</button>
 				</div>
 				<nav className={styles.mobileNavigation} ref={linksContainerRef}>
-					{/* {session ? (<a onClick={() => signOut()}>Sign Out</a>) : (<>Sign In</>)} */}
+					{session && (<button onClick={() => signOut()}>Sign Out</button>) }
 				</nav>
 			</div>
 		</div>

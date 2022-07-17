@@ -11,6 +11,7 @@
 	font-family: $primaryTextFont;
 	h3 {
 		font-size: $space-md;
+		cursor: pointer;
 	}
 	a {
 		color: $textBlack;
@@ -20,7 +21,8 @@
 	}
 	.nav {
 		display: flex;
-		gap: $space-xs;
+		align-items: center;
+		gap: $space-md;
 		p{
 			font-size: $space-sm;
 		}
@@ -29,6 +31,11 @@
 			gap: $space-md;
 			font-size: $space-sm;
 		}
+		
+	}
+	svg {
+		margin-right: 5px;
+		color: #183b56;
 	}
 }
 

@@ -2,14 +2,18 @@ import React from 'react';
 import { getSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
 import styles from './index.module.scss';
-import Posts from '../../components/blog/posts';
 import Nav from '../../components/dashboard/nav';
 
 function BlogPost(props: any) {
-	const { posts } = props;
+	const { post } = props;
+	console.log(post);
 	return (
 		<div className={styles.container}>
-			<Posts posts={posts} title="Blog Posts" />
+			<div>
+				<h2>{post.title}</h2>
+				<p>{post.author.email}</p>
+				<p>{post.entry.test}</p>
+			</div>
 			<Nav />
 		</div>
 	);
@@ -17,6 +21,7 @@ function BlogPost(props: any) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
+	const { params } = context;
 	// Redirect if user isn't logged in
 	if (!session) {
 		return {
@@ -29,12 +34,10 @@ export async function getServerSideProps(context: { req: any; }) {
 
 	const prisma = new PrismaClient();
 	// Fetch all posted jobs and include related items from Company table
-	const posts = await prisma.blog.findMany({
-		orderBy: [
-			{
-				date: 'desc',
-			},
-		],
+	const post = await prisma.blog.findUnique({
+		where: {
+			id: params.id,
+		},
 		include: {
 			author: {
 				select: {
@@ -43,13 +46,13 @@ export async function getServerSideProps(context: { req: any; }) {
 			},
 		},
 	});
-	console.log(posts);
+
 	return {
 		props: {
-			posts: posts.map((post) => ({
+			post: {
 				...post,
-				date: post.date.toISOString(),
-			})),
+				date: post?.date.toISOString(),
+			},
 		},
 	};
 }

@@ -1,0 +1,14 @@
+@import '../../../styles/globals.scss';
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 180px;
+	gap: 20px;
+	margin-top: $space-lg;
+	max-width: 1200px;
+	margin: $space-lg auto 0 auto;
+	:first-child{
+		max-width: 700px;
+		justify-self: center;
+	}
+}

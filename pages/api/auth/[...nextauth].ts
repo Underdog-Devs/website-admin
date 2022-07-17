@@ -72,6 +72,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 			session.accessToken = token.accessToken;
 			session.userType = token.userType;
 			session.email = token.email;
+			session.id = token.id;
 			return session;
 		},
 	},

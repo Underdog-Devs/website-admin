@@ -1,9 +1,9 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
-import styles from './index.module.scss';
-import Posts from '../../components/blog/posts';
-import Nav from '../../components/dashboard/nav';
+import styles from './post.module.scss';
+import Posts from '../../../components/blog/posts';
+import Nav from '../../../components/dashboard/nav';
 
 function BlogPost(props: any) {
 	const { posts } = props;
@@ -17,6 +17,7 @@ function BlogPost(props: any) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
+	const { params } = context;
 	// Redirect if user isn't logged in
 	if (!session) {
 		return {
@@ -30,11 +31,9 @@ export async function getServerSideProps(context: { req: any; }) {
 	const prisma = new PrismaClient();
 	// Fetch all posted jobs and include related items from Company table
 	const posts = await prisma.blog.findMany({
-		orderBy: [
-			{
-				date: 'desc',
-			},
-		],
+		where: {
+			authorId: params.id,
+		},
 		include: {
 			author: {
 				select: {
@@ -42,6 +41,11 @@ export async function getServerSideProps(context: { req: any; }) {
 				},
 			},
 		},
+		orderBy: [
+			{
+				date: 'desc',
+			},
+		],
 	});
 	console.log(posts);
 	return {
