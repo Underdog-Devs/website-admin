@@ -1,10 +1,5 @@
-import { useEditor, EditorContent, Editor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import React, { useContext, useState } from 'react';
-import Highlight from '@tiptap/extension-highlight';
-import Typography from '@tiptap/extension-typography';
-import Image from '@tiptap/extension-image';
-import TextAlign from '@tiptap/extension-text-align';
+import { EditorContent, Editor } from '@tiptap/react';
+import React from 'react';
 import { AiOutlineBold, AiOutlineItalic, AiOutlineStrikethrough, AiOutlineOrderedList, AiOutlineAlignLeft, AiOutlineAlignCenter, AiOutlineAlignRight, AiOutlineUndo, AiOutlineRedo } from 'react-icons/ai';
 import { BsCodeSlash, BsBlockquoteLeft, BsJustify, BsImage } from 'react-icons/bs';
 import { BiCodeBlock, BiParagraph } from 'react-icons/bi';
@@ -12,16 +7,12 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { VscHorizontalRule, VscNoNewline } from 'react-icons/vsc';
 import { FaHighlighter } from 'react-icons/fa';
-import { getSession, useSession } from 'next-auth/react';
-import axios from 'axios';
-import { Session } from '@auth0/nextjs-auth0';
 import styles from './tiptap-edit.module.scss';
-import { RootContext } from '../../../state/RootContext';
-import { Input } from '../../input';
 
 type MenuProps = {
 	editor: Editor | null;
 }
+
 function MenuBar(props: MenuProps) {
 	const { editor } = props;
 	if (!editor) {
@@ -142,32 +133,15 @@ function MenuBar(props: MenuProps) {
 	);
 }
 
-
 type Props = {
-	postToEdit?: any;
+	editor: Editor | null;
 }
 
-
 function TipTapEdit(props: Props) {
-	const { postToEdit } = props;
-	const { data: session } = useSession();
-	const { _, setBlogData } = useContext(RootContext);
-	const [blogTitle, setBlogTitle] = useState<string>(postToEdit ? postToEdit.title : '');
-
-	const editor = useEditor({
-		extensions: [
-			StarterKit,
-			Highlight,
-			Typography,
-			Image,
-			TextAlign.configure({
-				types: ['heading', 'paragraph'],
-			}),
-		],
-		content: postToEdit.entry,
-	});
+	const { editor } = props;
 
 	const addImage = () => {
+		// eslint-disable-next-line no-alert
 		const url = window.prompt('URL');
 
 		if (url) {
@@ -175,40 +149,9 @@ function TipTapEdit(props: Props) {
 		}
 	};
 
-	const postBlog = async () => {
-		try {
-			const res = await axios.post('/api/blog/create-entry', { entry: editor?.getJSON(), user: session?.user, title: blogTitle });
-			console.log(res);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const saveBlog = () => {
-		setBlogData(editor?.getJSON());
-		postBlog();
-		setBlogTitle('');
-		setBlogData(null);
-	};
-	const eraseBlog = () => {
-		setBlogData(null);
-	};
-
-	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setBlogTitle(e.target.value);
-	};
-
+	// TODO: Investigate why do we need EditorContent twice - lines 174, 176
 	return (
 		<div className={styles.content}>
-			<Input labelFor="title" labelText="Title">
-				<input
-					id="title"
-					type="text"
-					onChange={onTitleChange}
-					value={blogTitle}
-				/>
-			</Input>
-
 			<MenuBar editor={editor} />
 			<div>
 				<button onClick={addImage} className={styles.editButton}>
@@ -217,8 +160,6 @@ function TipTapEdit(props: Props) {
 				<EditorContent editor={editor} />
 			</div>
 			<EditorContent editor={editor} />
-			<button onClick={postBlog}>Save</button>
-			<button onClick={eraseBlog}>Clear</button>
 		</div>
 	);
 }

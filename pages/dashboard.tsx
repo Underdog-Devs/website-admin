@@ -10,6 +10,7 @@ type Props = {
 
 function Dashboard(props: Props) {
 	const { posts } = props;
+	console.log(posts);
 	// const posts = [{ title: 'Blog Title',
 	// 	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin auctor enim nec purus fermentum sodales. Donec sed varius arcu, volutpat pretium metus.',
 	// 	author: 'username',

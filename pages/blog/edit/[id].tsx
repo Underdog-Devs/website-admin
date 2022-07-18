@@ -1,49 +1,36 @@
-import Link from 'next/link';
 import React from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
-import Nav from '../../../components/dashboard/nav';
-import { Input } from '../../../components/input';
-import styles from './edit.module.scss';
+import StarterKit from '@tiptap/starter-kit';
+import Highlight from '@tiptap/extension-highlight';
+import Image from '@tiptap/extension-image';
+import Typography from '@tiptap/extension-typography';
+import TextAlign from '@tiptap/extension-text-align';
+import { useEditor } from '@tiptap/react';
 import TipTapEdit from '../../../components/blog/tiptapEditor/tiptap-edit';
+import styles from './edit.module.scss';
+import Nav from '../../../components/dashboard/nav';
 
 function EditPost(props: any) {
-	const { data: session } = useSession();
 	const { post } = props;
 	console.log('single:', post);
+
+	const editor = useEditor({
+		extensions: [
+			StarterKit,
+			Highlight,
+			Typography,
+			Image,
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
+		],
+		content: post?.entry,
+	});
+
 	return (
 		<div className={styles.container}>
-			<TipTapEdit postToEdit={post} />
-			{/* <section className={styles.leftCol}>
-				<p className={styles.instruction}>Instructions to upload mentee spotlight information.</p>
-			</section>
-			<section className={styles.rightCol}>
-				<div className={styles.back}>
-					<Link href="/dashboard" passHref>
-						<button className={styles.backButton}>
-							<FaChevronLeft /> Back{' '}
-						</button>
-					</Link>
-				</div>
-				<div className={styles.topInput}>
-					<Input labelFor="title" labelText="Title">
-						<input id="title" type="text" />
-					</Input>
-
-					<Input labelFor="titleText" labelText="Text">
-						<textarea
-							className={styles.titleText}
-							name="titleText"
-							rows={6}
-							id="titleText"
-						/>
-					</Input>
-				</div>
-				<div className={styles.sendButton}>
-					<input className={styles.button} type="submit" value="Send" />
-				</div>
-			</section> */}
+			<TipTapEdit editor={editor} />
 			<div>
 				<Nav />
 			</div>
@@ -51,7 +38,8 @@ function EditPost(props: any) {
 	);
 }
 
-export async function getServerSideProps(context: { req: any; }) {
+// TODO: Figure out context type for params
+export async function getServerSideProps(context: any) {
 	const session = await getSession({ req: context.req });
 	const { params } = context;
 	const prisma = new PrismaClient();

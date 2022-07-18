@@ -36,7 +36,7 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{session && (<p>{session.email} | <a onClick={() => signOut()}>Sign Out</a></p>) }
+						{session && (<button onClick={() => signOut()}>Sign Out</button>)}
 					</div>
 
 				</nav>
@@ -62,7 +62,7 @@ function NavBar() {
 					</button>
 				</div>
 				<nav className={styles.mobileNavigation} ref={linksContainerRef}>
-					{session ? (<a onClick={() => signOut()}>Sign Out</a>) : (<>Sign In</>)}
+					{session ? (<button onClick={() => signOut()}>Sign Out</button>) : (<>Sign In</>)}
 				</nav>
 			</div>
 		</div>

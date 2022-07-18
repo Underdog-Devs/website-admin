@@ -4,11 +4,11 @@ import styles from './post.module.scss';
 
 function Post(props: any) {
 	const { post } = props;
-
+	console.log(post.entry.content[0].content[0].text);
 	return (
 		<div className={styles.container}>
 			<h3>{post.title}</h3>
-			<p>{post.text}</p>
+			<div>{post.entry.content[0].content[0].text}</div>
 			<div className={styles.nav}>
 				<ul>
 					<li>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { getSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
 import { EditorContent, useEditor } from '@tiptap/react';
@@ -8,13 +8,11 @@ import Typography from '@tiptap/extension-typography';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
-import { RootContext } from '../../state/RootContext';
 import Nav from '../../components/dashboard/nav';
 import styles from './index.module.scss';
 
 function BlogPost(props: any) {
 	const { post } = props;
-	// const { blogData, setBlogData } = useContext(RootContext);
 
 	const editor = useEditor({
 		extensions: [
@@ -45,7 +43,7 @@ function BlogPost(props: any) {
 	);
 }
 
-export async function getServerSideProps(context: { req: any; }) {
+export async function getServerSideProps(context: any) {
 	const session = await getSession({ req: context.req });
 	const { params } = context;
 	// Redirect if user isn't logged in

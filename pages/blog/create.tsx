@@ -1,41 +1,78 @@
-import Link from 'next/link';
-import React from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
+import React, { useContext } from 'react';
 import { getSession, useSession } from 'next-auth/react';
-import { Session } from '@auth0/nextjs-auth0';
+import axios from 'axios';
+import StarterKit from '@tiptap/starter-kit';
+import Highlight from '@tiptap/extension-highlight';
+import Typography from '@tiptap/extension-typography';
+import Image from '@tiptap/extension-image';
+import TextAlign from '@tiptap/extension-text-align';
+import { useEditor } from '@tiptap/react';
+import { RootContext } from '../../state/RootContext';
+import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
+import styles from './create.module.scss';
 import Nav from '../../components/dashboard/nav';
 import { Input } from '../../components/input';
-import styles from './create.module.scss';
-import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
 
 function CreatePost() {
 	const { data: session } = useSession();
+	const { blogTitle, setBlogTitle } = useContext(RootContext);
 
+	const editor = useEditor({
+		extensions: [
+			StarterKit,
+			Highlight,
+			Typography,
+			Image,
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
+		],
+	});
+
+	const postBlog = async () => {
+		try {
+			const res = await axios.post('/api/blog/create-entry', {
+				entry: editor?.getJSON(),
+				user: session?.user,
+				title: blogTitle });
+			console.log(res);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const saveBlog = () => {
+		postBlog();
+		setBlogTitle('');
+		editor?.commands.clearContent();
+	};
+
+	const eraseBlog = () => {
+		console.log('clicked');
+		editor?.commands.clearContent();
+	};
+	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setBlogTitle(e.target.value);
+	};
 	return (
 		<div className={styles.container}>
-			<TipTapEdit session={session} />
-			{/* <section className={styles.leftCol}>
-				<p className={styles.instruction}>Instructions to upload mentee spotlight information.</p>
-			</section> */}
-			{/* <section className={styles.rightCol}>
-				<div className={styles.back}>
-					<Link href="/dashboard" passHref>
-						<button className={styles.backButton}>
-							<FaChevronLeft /> Back{' '}
-						</button>
-					</Link>
-				</div>
-				<div className={styles.topInput}>
-					<Input labelFor="title" labelText="Title">
-						<input id="title" type="text" />
-					</Input>
-				</div>
-				<div className={styles.sendButton}>
-					<input className={styles.button} type="submit" value="Send" />
-				</div>
-			</section> */}
+			<div>
+				<Input labelFor="title" labelText="Title">
+					<input
+						id="title"
+						type="text"
+						onChange={onTitleChange}
+						value={blogTitle}
+					/>
+				</Input>
+				<TipTapEdit editor={editor} />
+			</div>
 			<div>
 				<Nav />
+			</div>
+			<div>
+				<button onClick={saveBlog}>Save</button>
+				<button onClick={eraseBlog}>Clear</button>
 			</div>
 		</div>
 	);
