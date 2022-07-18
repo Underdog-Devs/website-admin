@@ -12,7 +12,7 @@ import styles from './edit.module.scss';
 import Nav from '../../../components/dashboard/nav';
 import { Input } from '../../../components/input';
 import { RootContext } from '../../../state/RootContext';
-import prisma from '../../../lib/prisma';
+import { prisma } from '../../../lib/prisma';
 
 function EditPost(props: any) {
 	const { post } = props;

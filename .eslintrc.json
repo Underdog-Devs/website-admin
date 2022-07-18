@@ -23,13 +23,9 @@
 		"no-restricted-syntax": "off",
 		"consistent-return": "off",
 		"func-names": "off",
+		"react/require-default-props": "off",
 		"array-callback-return": "off",
-		"react/function-component-definition": [
-			2,
-			{
-				"namedComponents": "function-declaration"
-			}
-		],
+		"react/function-component-definition": "off",
 		"jsx-a11y/label-has-associated-control": "off",
 		"import/no-extraneous-dependencies": "off",
 		"no-await-in-loop": "off",

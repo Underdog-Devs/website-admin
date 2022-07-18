@@ -7,6 +7,7 @@ import Nav from '../../components/dashboard/nav';
 
 function BlogPosts(props: any) {
 	const { posts } = props;
+	console.log(posts);
 	return (
 		<div className={styles.container}>
 			<Posts posts={posts} title="Blog Posts" />
@@ -14,7 +15,6 @@ function BlogPosts(props: any) {
 		</div>
 	);
 }
-
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
 	// Redirect if user isn't logged in

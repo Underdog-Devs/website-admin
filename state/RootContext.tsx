@@ -7,16 +7,17 @@ type PropsWithChildren = {
 }
 
 export const Provider: FC<PropsWithChildren> = ({ children }) => {
-	const [blogData, setBlogData] = useState<string | null>(null);
-
+	const [blogTitle, setBlogTitle] = useState<string | null>(null);
 	return (
-			<RootContext.Provider
+		<RootContext.Provider
+			// TODO: Investigate useMemo for useState
+			// eslint-disable-next-line react/jsx-no-constructed-context-values
 			value={{
-				blogData,
-				setBlogData,
+				blogTitle,
+				setBlogTitle,
 			}}
-			>
-				{children}
-			</RootContext.Provider>
+		>
+			{children}
+		</RootContext.Provider>
 	);
 };
