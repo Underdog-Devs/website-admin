@@ -11,9 +11,12 @@
 	font-family: $primaryTextFont;
 	h3 {
 		font-size: $space-md;
+		cursor: pointer;
 	}
 	a {
 		color: $textBlack;
+		cursor: pointer;
+		text-decoration: underline;
 	}
 	p {
 		line-height: $space-md;
