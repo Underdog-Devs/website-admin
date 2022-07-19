@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
 import StarterKit from '@tiptap/starter-kit';
@@ -13,10 +13,13 @@ import styles from './create.module.scss';
 import Nav from '../../components/dashboard/nav';
 import { Input } from '../../components/input';
 
+// TODO: Refactor create and edit post pages and endpoints and make them dynamic/reusable
 function CreatePost() {
 	const { data: session } = useSession();
 	const { blogTitle, setBlogTitle } = useContext(RootContext);
-
+	useEffect(() => {
+		setBlogTitle('');
+	}, []);
 	const editor = useEditor({
 		extensions: [
 			StarterKit,

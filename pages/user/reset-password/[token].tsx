@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { GetServerSideProps } from 'next';
+import { prisma } from '../../../lib/prisma';
 import PasswordReset from '../../../components/auth/password-reset';
 
 export type User = {
@@ -29,9 +29,9 @@ const resetPassword = (props: Props) => {
 	);
 };
 
+// TODO: Refactor other files with getServerSideProps to include type GetServerSideProps
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const token = context.params?.token as string;
-	const prisma = new PrismaClient();
 	const user = await prisma.user.findUnique({
 		where: {
 			token,

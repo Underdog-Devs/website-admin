@@ -16,7 +16,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 		if (existingUser) {
 			const result = await prisma.blog.update({
 				where: {
-					id: existingUser.id,
+					id: req.body.id,
 				},
 				data: {
 					authorId: existingUser.id,

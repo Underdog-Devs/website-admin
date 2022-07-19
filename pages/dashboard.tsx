@@ -1,8 +1,9 @@
 import React from 'react';
-import { PrismaClient } from '@prisma/client';
+import { GetServerSideProps } from 'next';
 import styles from './dashboard.module.scss';
 import Nav from '../components/dashboard/nav';
 import Posts from '../components/blog/posts';
+import { prisma } from '../lib/prisma';
 
 type Props = {
 	posts: any;
@@ -10,7 +11,6 @@ type Props = {
 
 function Dashboard(props: Props) {
 	const { posts } = props;
-	console.log(posts);
 	// const posts = [{ title: 'Blog Title',
 	// 	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin auctor enim nec purus fermentum sodales. Donec sed varius arcu, volutpat pretium metus.',
 	// 	author: 'username',
@@ -26,7 +26,7 @@ function Dashboard(props: Props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.main}>
-				<Posts posts={posts} title="Latest Posts" />
+				<div>test</div>
 				<Posts posts={posts} title="Latest Posts" />
 			</div>
 			<div>
@@ -36,8 +36,7 @@ function Dashboard(props: Props) {
 	);
 }
 
-export async function getServerSideProps() {
-	const prisma = new PrismaClient();
+export const getServerSideProps: GetServerSideProps = async () => {
 	// Fetch all posted jobs and include related items from Company table
 	const posts = await prisma.blog.findMany({
 		take: 3,
@@ -55,6 +54,6 @@ export async function getServerSideProps() {
 			})),
 		},
 	};
-}
+};
 
 export default Dashboard;
