@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
+import hasUser from '../../../middleware/hasUser';
 // pages/api/post/index.ts
 
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+	const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		const existingUser = await prisma.user.findUnique({
-			where: {
-				email: req.body.user.email,
-			},
-		});
+
+		console.log("Hey now look at meee! Ishould be in create-entry!");
+		let existingUser = req.body.user;
 		console.log({ existingUser });
 		if (existingUser) {
 			const result = await prisma.blog.create({
@@ -34,3 +33,5 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 		console.error(error);
 	}
 }
+
+export default hasUser(handler);
