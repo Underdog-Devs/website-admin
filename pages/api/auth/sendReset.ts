@@ -50,7 +50,5 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 		res.status(500);
 		console.error(e);
 		res.json({ message: 'Internal Server Error Sending Reset Message' });
-	} finally {
-		await prisma.$disconnect();
 	}
 }
