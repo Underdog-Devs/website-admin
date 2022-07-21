@@ -2,10 +2,11 @@ import { prisma } from '../lib/prisma';
 
 const hasBlogId = (handler) => {
 	return async(req,res) => {
-
+		console.log("Hey there, just checkinbgg if a blogid exists!\n\n");
 		try {
+			console.log("\n\n"+JSON.stringify(req.body)+"\n\n");
 			let blogId = req.body.id;
-			if(blogId == null || blogId || undefined) {
+			if(blogId == null || blogId == undefined) {
 				throw "Blog entry not found!";
 			}
 			const blogExists = await prisma.blog.findUnique({
@@ -14,7 +15,7 @@ const hasBlogId = (handler) => {
 				}
 			});
 	
-			if(blogExists == null || blogExists || undefined) {
+			if(blogExists == null || blogExists == undefined) {
 				throw "Blog entry not found!";
 			}
 			return handler(req,res);
