@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
+import hasBlogId from '../../../middleware/hasBlogId';
 // pages/api/post/index.ts
 
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+	const handler = async(req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		const existingUser = await prisma.user.findUnique({
 			where: {
@@ -37,3 +38,5 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 		console.error(error);
 	}
 }
+
+export default hasBlogId(handler);
