@@ -24,9 +24,9 @@ function Post(props: any) {
 	return (
 		<div className={styles.container}>
 			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
-			{post.entry.content[0].content.map((singleContent: { text: any; }) => {
+			{post.entry.content[0].content.map((singleContent: { text: any; }, idx: number) => {
 				return (
-					<div>{singleContent.text}</div>
+					<React.Fragment key={idx}>{singleContent.text}</React.Fragment>
 				);
 			})}
 			<div className={styles.nav}>
@@ -46,7 +46,7 @@ function Post(props: any) {
 					</li>
 					<li>
 						<a href={`https://www.underdogdevs.org/blog/${post.id}`}>
-							Read More
+							View Live
 						</a>
 					</li>
 				</ul>
