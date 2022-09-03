@@ -17,9 +17,11 @@ import { Input } from '../../components/input';
 function CreatePost() {
 	const { data: session } = useSession();
 	const { blogTitle, setBlogTitle } = useContext(RootContext);
+
 	useEffect(() => {
 		setBlogTitle('');
 	}, []);
+
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -37,7 +39,8 @@ function CreatePost() {
 			const res = await axios.post('/api/blog/create-entry', {
 				entry: editor?.getJSON(),
 				user: session?.user,
-				title: blogTitle });
+				title: blogTitle,
+			});
 			console.log(res);
 		} catch (error) {
 			console.error(error);
