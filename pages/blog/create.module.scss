@@ -1,29 +1,34 @@
 @import '../../styles/globals.scss';
 
 .container {
-	display: flex;
-	flex-direction: row;
-	margin: $space-sm 0;
+	display: grid;
+	grid-template-columns: 300px 1fr 180px;
+	margin-top: $space-lg;
+	max-width: 1200px;
+	margin: $space-lg auto 0 auto;
 
 	.leftCol {
-		width: 40%;
 		display: flex;
 		align-items: center;
 		padding: 0 $space-xl;
-		background-color: $menteeBlue;
+		background-color: #f2f5f8;
+		border: 1px solid #d8dde2;
+		padding: $space-md;
+		border-radius: $space-sm;
 
 		.instruction {
 			font-size: $f4;
-			color: white;
 		}
 	}
 	.rightCol {
-		width: 60%;
+		margin: 0 $space-xl;
 		padding: $space-sm;
+		justify-self: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		padding: 0 $space-md;
+		width: 550px;
 
 		.back {
 			.backButton {
@@ -39,16 +44,6 @@
 				margin: $space-sm 0 $space-xs 0;
 				cursor: pointer;
 			}
-		}
-
-		.topInput {
-			margin-bottom: $space-lg;
-		}
-
-		.socialsContainer {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
 		}
 
 		.button {

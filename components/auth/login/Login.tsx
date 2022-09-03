@@ -17,40 +17,34 @@ const initialFormData = {
 
 export function Login(props: Props) {
 	const { } = props;
-	const [formData, setFormData] = useState<FormData>(initialFormData);
+	const [credentials, setCredentials] = useState<FormData>({
+		email: '',
+		password: '',
+	});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+	const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setCredentials({ ...credentials, [name]: value });
 	};
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		setFormData(initialFormData);
-		console.log('submitting');
 		try {
 			await signIn('credentials', {
-				redirect: false,
-				email: formData.email,
-				password: formData.password,
-				callbackUrl: '/',
+				redirect: true,
+				email: credentials.email,
+				password: credentials.password,
+				callbackUrl: '/dashboard',
 			});
 		} catch (err) {
 			// TODO: instead of logging the error here we should create error handling to show the user that the email and password were not correct
 			console.error(err);
 		}
+		setCredentials(initialFormData);
 	};
 
 	return (
 		<div className={styles.container}>
-			<img
-				className={styles.logoImage}
-				src="/images/underdogdevs-01.png"
-				alt="Underdog Devs Logo"
-				height={300}
-				width={300}
-				loading="lazy"
-			/>
 			<div className={styles.formContainer}>
 				<h4 className={styles.title}>Login</h4>
 				<form className={styles.form} onSubmit={handleSubmit}>
@@ -60,8 +54,8 @@ export function Login(props: Props) {
 							type="email"
 							name="email"
 							id="email"
-							value={formData.email}
-							onChange={handleChange}
+							value={credentials.email}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="email">Email</label>
 					</div>
@@ -71,8 +65,8 @@ export function Login(props: Props) {
 							type="password"
 							name="password"
 							id="password"
-							value={formData.password}
-							onChange={handleChange}
+							value={credentials.password}
+							onChange={handleChanges}
 						/>
 						<label className={styles.formLabel} htmlFor="password">Password</label>
 					</div>

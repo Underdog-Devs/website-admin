@@ -7,7 +7,7 @@ import prisma from '../../../lib/prisma';
 export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
 	secret: process.env.JWT_SECRET,
 	session: {
-		maxAge: 30,
+		maxAge: 300,
 		updateAge: 24,
 	},
 	providers: [
@@ -36,7 +36,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 				if (!user) {
 					// If you return null then an error will be displayed advising the user to check their details.
 					// You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-					console.log('Error: no user found');
+					// TODO: error handle this to display to user
+					console.error('Error: no user found');
 					return null;
 				}
 				// Any object returned will be saved in `user` property of the JWT
@@ -47,7 +48,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 						throw new Error('Invalid Credentials');
 					}
 				}
-				console.log('Success');
 				return user;
 			},
 		}),
@@ -57,6 +57,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 			if (user) {
 				return {
 					...token,
+					userType: user.userType,
+					email: user.email,
 					id: user.id,
 				};
 			}
@@ -69,6 +71,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 
 			// return session2;
 			session.accessToken = token.accessToken;
+			session.userType = token.userType;
+			session.email = token.email;
 			return session;
 		},
 	},

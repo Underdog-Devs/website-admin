@@ -1,0 +1,71 @@
+@import '../../styles/globals.scss';
+
+.container {
+	display: grid;
+	grid-template-columns: 300px 1fr 180px;
+	margin-top: $space-lg;
+	max-width: 1200px;
+	margin: $space-lg auto 0 auto;
+
+	.leftCol {
+		display: flex;
+		align-items: center;
+		padding: 0 $space-xl;
+		background-color: $menteeBlue;
+
+		.instruction {
+			font-size: $f4;
+			color: white;
+		}
+	}
+	.rightCol {
+		margin: 0 $space-xl;
+		padding: $space-sm;
+		justify-self: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0 $space-md;
+		width: 550px;
+
+		.back {
+			.backButton {
+				font-family: $linkFont;
+				background: white;
+				color: $subTextBlack;
+				border: none;
+				font-weight: 600;
+				font-size: $subtitle;
+				display: flex;
+				align-items: center;
+				padding: 0;
+				margin: $space-sm 0 $space-xs 0;
+				cursor: pointer;
+			}
+		}
+
+		.button {
+			background-color: $involvedBlue;
+			color: white;
+			padding: $space-sm $space-lg;
+			margin-left: $space-sm;
+			border-radius: $space-xxs;
+			border: none;
+			cursor: pointer;
+
+			&:active {
+				transform: scale(0.98);
+			}
+		}
+
+		.sendButton {
+			display: flex;
+			justify-content: center;
+
+			.button {
+				align-self: center;
+				width: 250px;
+			}
+		}
+	}
+}

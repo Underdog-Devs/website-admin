@@ -42,7 +42,7 @@ model Spotlight {
 model Blog {
   id       String   @id @default(cuid())
   authorId String
+	title 	 String
   entry    Json
   date     DateTime @default(now())
-
 }

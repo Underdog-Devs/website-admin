@@ -1,0 +1,18 @@
+@import '../../styles/globals.scss';
+
+.container {
+	background-color: #f2f5f8;
+	border: 1px solid #d8dde2;
+	border-radius: $space-sm;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 20px;
+	width: 100%;
+	box-sizing: border-box;
+	
+	h2 {
+		margin-left: $space-xs;
+		font-size: $space-lg;
+	}
+}
