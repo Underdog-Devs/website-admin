@@ -36,7 +36,7 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{session ? (<p onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}>Sign Out</p>) : (
+						{session ? (<p onClick={() => signOut({ callbackUrl: process.env.BASE_URL })}>Sign Out</p>) : (
 							// TODO: remove this link when already on sign in page
 							<Link href="/" passHref>
 								Sign In
