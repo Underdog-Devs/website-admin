@@ -7,8 +7,7 @@ import Nav from '../../../components/dashboard/nav';
 import { Input } from '../../../components/input';
 import styles from './edit.module.scss';
 
-function EditPost(props: any) {
-	const { post } = props;
+function EditPost() {
 	return (
 		<div className={styles.container}>
 			<section className={styles.leftCol}>
