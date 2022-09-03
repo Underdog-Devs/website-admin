@@ -16,6 +16,7 @@ import { prisma } from '../../../lib/prisma';
 
 function EditPost(props: any) {
 	const { post } = props;
+
 	useEffect(() => {
 		setBlogTitle(post.title);
 	}, []);

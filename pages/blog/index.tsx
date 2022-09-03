@@ -28,20 +28,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		};
 	}
 
-	// Fetch all posted jobs and include related items from Company table
+	// Fetch all posted blogs and include related items author table
 	const posts = await prisma.blog.findMany({
 		orderBy: [
 			{
 				date: 'desc',
 			},
 		],
-		include: {
-			author: {
-				select: {
-					email: true,
-				},
-			},
-		},
+		// include: {
+		// 	author: {
+		// 		select: {
+		// 			email: true,
+		// 		},
+		// 	},
+		// },
 	});
 	return {
 		props: {
