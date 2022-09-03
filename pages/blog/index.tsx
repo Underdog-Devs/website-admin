@@ -36,7 +36,6 @@ export async function getServerSideProps(context: { req: any; }) {
 			},
 		],
 	});
-	console.log(posts);
 	return {
 		props: {
 			posts: posts.map((post) => ({

@@ -3,7 +3,6 @@ import prisma from '../../../lib/prisma';
 import { hashPassword } from '../../../lib/auth';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-	console.log(req.body);
 	const { credentials } = req.body;
 	const { email, password } = credentials;
 	// email and password validation

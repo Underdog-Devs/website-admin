@@ -9,7 +9,6 @@ import styles from './edit.module.scss';
 
 function EditPost(props: any) {
 	const { post } = props;
-	console.log('single:', post);
 	return (
 		<div className={styles.container}>
 			<section className={styles.leftCol}>
@@ -50,7 +49,7 @@ function EditPost(props: any) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
-	const { params } = context;
+	const { params } = context.req;
 	const prisma = new PrismaClient();
 	// Redirect if user isn't logged in
 	if (!session) {
