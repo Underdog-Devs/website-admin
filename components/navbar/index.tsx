@@ -1,8 +1,7 @@
-import { useSession, signOut, getSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { PrismaClient } from '@prisma/client';
 import styles from './navBar.module.scss';
 
 function NavBar() {
@@ -37,12 +36,10 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{session ? (<a onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}>Sign Out</a>) : (
+						{session ? (<p onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}>Sign Out</p>) : (
 							// TODO: remove this link when already on sign in page
 							<Link href="/" passHref>
-								<a>
-									Sign In
-								</a>
+								Sign In
 							</Link>
 						)}
 					</div>
@@ -69,11 +66,9 @@ function NavBar() {
 					</button>
 				</div>
 				<nav className={styles.mobileNavigation} ref={linksContainerRef}>
-					{session ? (<a onClick={() => signOut()}>Sign Out</a>) : (
+					{session ? (<p onClick={() => signOut()}>Sign Out</p>) : (
 						<Link href="/" passHref>
-							<a>
-								Sign In
-							</a>
+							Sign In
 						</Link>
 					)}
 				</nav>
