@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './posts.module.scss';
-import Post from './post';
+import Post, { BlogPost } from './post';
 
 type Props = {
-	posts: any;
+	posts: BlogPost[];
 	title: string;
-}
-
-type singlePost = {
-	id: string;
 }
 
 function Posts(props: Props) {
@@ -16,7 +12,7 @@ function Posts(props: Props) {
 	return (
 		<div className={styles.container}>
 			<h2>{title}</h2>
-			{posts?posts.map((post:singlePost) => (
+			{posts?posts.map((post:BlogPost) => (
 				<Post post={post} />
 			)):<div>loading</div>}
 		</div>

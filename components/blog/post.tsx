@@ -2,8 +2,19 @@ import Link from 'next/link';
 import React from 'react';
 import styles from './post.module.scss';
 
-function Post({ post }) {
-	console.log(post);
+export interface BlogPost {
+	id: string,
+	title: string,
+	text: string,
+	date: string,
+}
+
+type Props = {
+	post: BlogPost
+}
+
+function Post(props: Props) {
+	const {post} = props;
 	return (
 		<div className={styles.container}>
 			<h3>{post.title}</h3>
