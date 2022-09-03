@@ -14,7 +14,7 @@ type Props = {
 }
 
 function Post(props: Props) {
-	const {post} = props;
+	const { post } = props;
 	return (
 		<div className={styles.container}>
 			<h3>{post.title}</h3>

@@ -25,7 +25,7 @@ function Auth() {
 			});
 		} catch (err) {
 			// TODO: add error handling for the user
-			console.error(err)
+			console.error(err);
 		}
 	};
 
