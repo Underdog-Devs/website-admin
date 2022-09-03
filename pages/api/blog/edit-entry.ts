@@ -6,7 +6,7 @@ import hasBlogId from '../../../middleware/hasBlogId';
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
-	const handler = async(req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		const existingUser = await prisma.user.findUnique({
 			where: {
@@ -37,6 +37,6 @@ import hasBlogId from '../../../middleware/hasBlogId';
 	} catch (error) {
 		console.error(error);
 	}
-}
+};
 
 export default hasBlogId(handler);

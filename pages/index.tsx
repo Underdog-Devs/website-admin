@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import { Login } from '../components/auth/login';
 import styles from './index.module.scss';
 

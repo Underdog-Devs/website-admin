@@ -6,11 +6,10 @@ import hasUser from '../../../middleware/hasUser';
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
-	const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-
-		console.log("Hey now look at meee! Ishould be in create-entry!");
-		let existingUser = req.body.user;
+		console.log('Hey now look at meee! Ishould be in create-entry!');
+		const existingUser = req.body.user;
 		console.log({ existingUser });
 		if (existingUser) {
 			const result = await prisma.blog.create({
@@ -32,6 +31,6 @@ import hasUser from '../../../middleware/hasUser';
 	} catch (error) {
 		console.error(error);
 	}
-}
+};
 
 export default hasUser(handler);
