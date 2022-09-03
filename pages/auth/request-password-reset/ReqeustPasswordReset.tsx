@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from '../../../components/auth/login/login.module.scss';
@@ -13,10 +14,16 @@ export function RequestPasswordReset(props: Props) {
 		setEmail(value);
 	};
 
-	const handleSubmit = (e: React.SyntheticEvent) => {
+	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log(email);
-		setEmail('');
+		try {
+			await axios.post('/api/auth/sendReset', {
+				email,
+			});
+		} catch (err) {
+			// TODO: instead of logging the error here we should create error handling to show the user there was a problem
+			console.error(err);
+		}
 	};
 
 	return (
@@ -44,8 +51,8 @@ export function RequestPasswordReset(props: Props) {
 						<label className={styles.formLabel} htmlFor="email">Email</label>
 					</div>
 					<div className={styles.formActions}>
+						<Link href="/"><a className={`${styles.passwordResetLink} ${styles.formButton}`}>Back to login</a></Link>
 						<button type="submit" className={styles.formButton}>Submit</button>
-						<Link href="/"><a className={styles.passwordResetLink}>Login</a></Link>
 					</div>
 				</form>
 			</div>

@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './login.module.scss';
@@ -23,10 +24,21 @@ export function Login(props: Props) {
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const handleSubmit = (e: React.SyntheticEvent) => {
+	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		console.log(formData);
 		setFormData(initialFormData);
+		console.log('submitting');
+		try {
+			await signIn('credentials', {
+				redirect: false,
+				email: formData.email,
+				password: formData.password,
+				callbackUrl: '/',
+			});
+		} catch (err) {
+			// TODO: instead of logging the error here we should create error handling to show the user that the email and password were not correct
+			console.error(err);
+		}
 	};
 
 	return (
@@ -65,8 +77,8 @@ export function Login(props: Props) {
 						<label className={styles.formLabel} htmlFor="password">Password</label>
 					</div>
 					<div className={styles.formActions}>
-						<button type="submit" className={styles.formButton}>Login</button>
-						<Link href="/auth/request-password-reset"><a className={styles.passwordResetLink}>Forgot Password?</a></Link>
+						<Link href="/auth/request-password-reset"><a className={`${styles.passwordResetLink} ${styles.formButton}`}>Forgot Password?</a></Link>
+						<button type="submit" className={styles.formButton}>Submit</button>
 					</div>
 				</form>
 			</div>

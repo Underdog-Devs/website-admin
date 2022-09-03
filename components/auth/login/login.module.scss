@@ -47,8 +47,7 @@
 				justify-content: space-between;
 				align-items: center;
 				padding: $space-lg 0;
-				.formButton,
-				.passwordResetLink {
+				.formButton {
 					background: none;
 					border: none;
 					color: white;
@@ -61,6 +60,12 @@
 						color: $udGrey;
 						text-decoration: underline;
 					}
+				}
+				.passwordResetLink {
+					color: $involvedBlue;
+					margin-top: $space-xxxs;
+					font-size: $label;
+					font-style: italic;
 				}
 			}
 		}
