@@ -2,9 +2,12 @@ import { useSession, signOut } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import styles from './navBar.module.scss';
 
 function NavBar() {
+	const router = useRouter();
+	console.log(router);
 	const { data: session } = useSession();
 	const [showLinks, setShowLinks] = useState(false);
 	const linksContainerRef = useRef<HTMLElement | null>(null);
@@ -36,8 +39,7 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{session ? (<p onClick={() => signOut({ callbackUrl: process.env.BASE_URL })}>Sign Out</p>) : (
-							// TODO: remove this link when already on sign in page
+						{session ? (<p onClick={() => signOut({ callbackUrl: process.env.BASE_URL })}>Sign Out</p>) : router.pathname !== '/' && (
 							<Link href="/" passHref>
 								Sign In
 							</Link>
