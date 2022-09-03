@@ -24,6 +24,7 @@ export function RequestPasswordReset(props: Props) {
 			// TODO: instead of logging the error here we should create error handling to show the user there was a problem
 			console.error(err);
 		}
+		setEmail('');
 	};
 
 	return (
