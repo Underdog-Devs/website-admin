@@ -34,8 +34,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 			}
 		} catch (e) {
 			res.status(500).json({ error: 'Internal server error updating user password' });
-		} finally {
-			await prisma.$disconnect();
 		}
 	} else {
 		res.status(500).json({ error: 'Internal server error updating user password' });

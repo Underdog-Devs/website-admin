@@ -41,7 +41,5 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	} catch (e) {
 		res.status(500);
 		res.json({ error: 'Internal Server Error Creating User' });
-	} finally {
-		await prisma.$disconnect();
 	}
 }

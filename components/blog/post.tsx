@@ -1,26 +1,46 @@
+import axios from 'axios';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './post.module.scss';
 
-export interface BlogPost {
-	id: string,
-	title: string,
-	text: string,
-	date: string,
-}
-
-type Props = {
-	post: BlogPost
-}
-
-function Post(props: Props) {
+function Post(props: any) {
 	const { post } = props;
+	const [deleteMessage, setDeleteMessage] = useState(false);
+
+	const deletePost = async () => {
+		try {
+			const res = await axios.post('/api/blog/delete', {
+				id: post.id,
+			});
+			console.log(res);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const toggleDeleteMessage = () => {
+		setDeleteMessage(!deleteMessage);
+	};
 	return (
 		<div className={styles.container}>
-			<h3>{post.title}</h3>
-			<p>{post.text}</p>
+			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
+			{post.entry.content && post.entry.content[0].content.map((singleContent: { text: any; }) => {
+				return (
+					<div>{singleContent.text}</div>
+				);
+			})}
 			<div className={styles.nav}>
 				<ul>
+					{deleteMessage ? (
+						<><li onClick={deletePost}><a>Yes</a></li>
+							<li onClick={toggleDeleteMessage}><a>No</a></li>
+						</>
+					)
+						: (
+							<li onClick={toggleDeleteMessage}>
+								<a>Delete</a>
+							</li>
+						)}
 					<li>
 						<Link href={`/blog/edit/${post.id}`}><a>Edit</a></Link>
 					</li>

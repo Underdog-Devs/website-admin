@@ -1,2 +1,11 @@
 @import './variables.scss';
 @import './mixins.scss';
+
+.ProseMirror:focus {
+	outline: none !important;
+}
+.ProseMirror {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	padding: 15px;
+}

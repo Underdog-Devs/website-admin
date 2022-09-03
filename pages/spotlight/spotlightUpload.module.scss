@@ -1,10 +1,9 @@
-@import '../../../styles/globals.scss';
+@import '../../styles/globals.scss';
 
 .container {
 	display: grid;
-	grid-template-columns: 1fr 180px;
-	margin: $space-sm 0;
-	justify-items: center;
+	grid-template-columns: 300px 1fr 180px;
+	margin-top: $space-lg;
 	max-width: 1200px;
 	margin: $space-lg auto 0 auto;
 
@@ -22,6 +21,7 @@
 	.rightCol {
 		margin: 0 $space-xl;
 		padding: $space-sm;
+		justify-self: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -42,6 +42,12 @@
 				margin: $space-sm 0 $space-xs 0;
 				cursor: pointer;
 			}
+		}
+
+		.socialsContainer {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
 		}
 
 		.button {

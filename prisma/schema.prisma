@@ -7,6 +7,9 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
 model User {
   id           String   @id @default(cuid())
   name         String?
@@ -19,6 +22,7 @@ model User {
   linkedinUrl  String?
   instagramUrl String?
   youtubeUrl   String?
+  posts        Blog[]
   token        String?  @unique
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
@@ -41,8 +45,9 @@ model Spotlight {
 
 model Blog {
   id       String   @id @default(cuid())
+  author   User     @relation(fields: [authorId], references: [id])
   authorId String
-	title 	 String
+  title    String
   entry    Json
   date     DateTime @default(now())
 }
