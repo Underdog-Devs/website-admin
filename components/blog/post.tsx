@@ -24,7 +24,7 @@ function Post(props: any) {
 	return (
 		<div className={styles.container}>
 			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
-			{post.entry.content[0].content.map((singleContent: { text: any; }) => {
+			{post.entry.content && post.entry.content[0].content.map((singleContent: { text: any; }) => {
 				return (
 					<div>{singleContent.text}</div>
 				);
