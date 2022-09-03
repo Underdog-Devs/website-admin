@@ -38,7 +38,6 @@ function Dashboard(props: Props) {
 
 export async function getServerSideProps(context: { req: any; }) {
 	const session = await getSession({ req: context.req });
-	console.log(session);
 	// Redirect if user isn't logged in
 	if (!session) {
 		return {

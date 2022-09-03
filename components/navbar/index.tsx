@@ -7,7 +7,6 @@ import styles from './navBar.module.scss';
 
 function NavBar() {
 	const router = useRouter();
-	console.log(router);
 	const { data: session } = useSession();
 	const [showLinks, setShowLinks] = useState(false);
 	const linksContainerRef = useRef<HTMLElement | null>(null);

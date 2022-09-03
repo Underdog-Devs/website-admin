@@ -36,7 +36,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 				if (!user) {
 					// If you return null then an error will be displayed advising the user to check their details.
 					// You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-					console.log('Error: no user found');
+					// TODO: error handle this to display to user
+					console.error('Error: no user found');
 					return null;
 				}
 				// Any object returned will be saved in `user` property of the JWT

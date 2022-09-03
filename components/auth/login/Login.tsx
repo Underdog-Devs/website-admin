@@ -10,10 +10,10 @@ type FormData = {
 	password: string;
 }
 
-// const initialFormData = {
-// 	email: '',
-// 	password: '',
-// };
+const initialFormData = {
+	email: '',
+	password: '',
+};
 
 export function Login(props: Props) {
 	const { } = props;
@@ -29,19 +29,18 @@ export function Login(props: Props) {
 
 	const handleSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		setFormData(initialFormData);
-		console.log('submitting');
 		try {
 			await signIn('credentials', {
-				redirect: false,
-				email: formData.email,
-				password: formData.password,
-				callbackUrl: '/',
+				redirect: true,
+				email: credentials.email,
+				password: credentials.password,
+				callbackUrl: '/dashboard',
 			});
 		} catch (err) {
 			// TODO: instead of logging the error here we should create error handling to show the user that the email and password were not correct
 			console.error(err);
 		}
+		setCredentials(initialFormData);
 	};
 
 	return (
