@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import styles from './dashboard.module.scss';
 import Nav from '../components/dashboard/nav';
 import Posts from '../components/blog/posts';
+import { getSession } from 'next-auth/react';
 
 type Props = {
 	posts: any;
@@ -35,25 +36,39 @@ function Dashboard(props: Props) {
 	);
 }
 
-export async function getServerSideProps() {
-	const prisma = new PrismaClient();
-	// Fetch all posted jobs and include related items from Company table
-	const posts = await prisma.blog.findMany({
-		take: 3,
-		orderBy: [
-			{
-				date: 'desc',
+
+export async function getServerSideProps(context: { req: any; }) {
+	const session = await getSession({ req: context.req })
+	console.log(session)
+	// Redirect if user isn't logged in
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false,
 			},
-		],
-	});
-	return {
-		props: {
-			posts: posts.map((post) => ({
-				...post,
-				date: post.date.toISOString(),
-			})),
-		},
-	};
+		};
+	} else {
+		const prisma = new PrismaClient();
+		// Fetch all posted jobs and include related items from Company table
+		const posts = await prisma.blog.findMany({
+			take: 3,
+			orderBy: [
+				{
+					date: 'desc',
+				},
+			],
+		});
+		return {
+			props: {
+				posts: posts.map((post) => ({
+					...post,
+					date: post.date.toISOString(),
+				})),
+			},
+		};
+
+	}
 }
 
 export default Dashboard;
