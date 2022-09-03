@@ -19,7 +19,6 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 				},
 			},
 		});
-		console.log({ result });
 		if (result) {
 			res.status(200).json(result);
 		} else {
