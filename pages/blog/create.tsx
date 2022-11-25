@@ -62,7 +62,7 @@ function CreatePost() {
 	};
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.leftCol}>
 				<Input labelFor="title" labelText="Title">
 					<input
 						id="title"
@@ -84,7 +84,7 @@ function CreatePost() {
 	);
 }
 
-export async function getServerSideProps(context: { req: any; }) {
+export async function getServerSideProps(context: { req: any }) {
 	const session = await getSession({ req: context.req });
 	// Redirect if user isn't logged in
 	if (!session) {
