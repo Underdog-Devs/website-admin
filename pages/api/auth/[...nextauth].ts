@@ -5,7 +5,6 @@ import { verifyPassword } from '../../../lib/auth';
 import prisma from '../../../lib/prisma';
 
 export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
-	secret: process.env.JWT_SECRET,
 	session: {
 		maxAge: 3000,
 		updateAge: 24,
@@ -52,6 +51,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 			},
 		}),
 	],
+	secret: process.env.NEXTAUTH_SECRET,
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {

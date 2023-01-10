@@ -7,7 +7,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	const { email } = req.body;
 	const { sign } = jwt;
 	// Sign the token with JWT
-	const token = sign({ email }, process.env.JWT_SECRET + email, {
+	const token = sign({ email }, process.env.NEXTAUTH_SECRET + email, {
 		expiresIn: '1d',
 	});
 
