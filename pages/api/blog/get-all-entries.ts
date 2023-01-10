@@ -6,7 +6,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 		const result = await prisma.blog.findMany({
 			orderBy: [
 				{
-					createdAt: 'desc',
+					date: 'desc',
 				},
 			],
 		});
