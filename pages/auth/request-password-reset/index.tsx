@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from '../../../components/auth/login/login.module.scss';
 
-type Props = {}
+type Props = {};
 
-export function RequestPasswordReset(props: Props) {
-	const { } = props;
+function RequestPasswordReset(props: Props) {
+	const {} = props;
 	const [email, setEmail] = useState<string>('');
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +49,24 @@ export function RequestPasswordReset(props: Props) {
 							value={email}
 							onChange={handleChange}
 						/>
-						<label className={styles.formLabel} htmlFor="email">Email</label>
+						<label className={styles.formLabel} htmlFor="email">
+							Email
+						</label>
 					</div>
 					<div className={styles.formActions}>
-						<Link href="/"><a className={`${styles.passwordResetLink} ${styles.formButton}`}>Back to login</a></Link>
-						<button type="submit" className={styles.formButton}>Submit</button>
+						<Link href="/">
+							<a className={`${styles.passwordResetLink} ${styles.formButton}`}>
+								Back to login
+							</a>
+						</Link>
+						<button type="submit" className={styles.formButton}>
+							Submit
+						</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	);
 }
+
+export default RequestPasswordReset;
