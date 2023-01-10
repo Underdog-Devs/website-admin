@@ -51,7 +51,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
 			},
 		}),
 	],
-	// secret: process.env.NEXTAUTH_SECRET,
+	secret: process.env.NEXTAUTH_SECRET,
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {

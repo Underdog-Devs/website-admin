@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATANEXTAUTH_URL")
+  url      = env("NEXTAUTH_URL")
 }
 
 generator client {
