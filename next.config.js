@@ -7,6 +7,10 @@ const nextConfig = {
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 		SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
 	},
+	images: {
+		loader: 'akamai',
+		path: '',
+	},
 };
 
 module.exports = nextConfig;
