@@ -14,12 +14,7 @@
   "dependencies": {
     "@prisma/client": "^3.14.0",
     "@sendgrid/mail": "^7.6.2",
-    "@tiptap/extension-highlight": "^2.0.0-beta.35",
-    "@tiptap/extension-image": "^2.0.0-beta.30",
-    "@tiptap/extension-text-align": "^2.0.0-beta.31",
-    "@tiptap/extension-typography": "^2.0.0-beta.22",
-    "@tiptap/react": "^2.0.0-beta.114",
-    "@tiptap/starter-kit": "^2.0.0-beta.191",
+    "aws-sdk": "^2.1295.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.0",
