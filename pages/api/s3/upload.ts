@@ -3,8 +3,8 @@ import S3 from 'aws-sdk/clients/s3';
 
 const s3 = new S3({
   region: 'us-east-2',
-  accessKeyId: 'AKIA527BGJO27EY5D4V6',
-  secretAccessKey: '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',
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
   signatureVersion: 'v4',
 });
 

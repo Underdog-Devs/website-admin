@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
-// import StarterKit from '@tiptap/starter-kit';
-// import Highlight from '@tiptap/extension-highlight';
-// import Typography from '@tiptap/extension-typography';
-// import Image from '@tiptap/extension-image';
-// import TextAlign from '@tiptap/extension-text-align';
-// import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Highlight from '@tiptap/extension-highlight';
+import Typography from '@tiptap/extension-typography';
+import { Image as tiptapImage } from '@tiptap/extension-image';
+import TextAlign from '@tiptap/extension-text-align';
+import { useEditor } from '@tiptap/react';
 import { RootContext } from '../../state/RootContext';
-// import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
+import TipTapEdit from '../../components/blog/tiptapEditor/tiptap-edit';
 import styles from './create.module.scss';
 import Nav from '../../components/dashboard/nav';
 import { Input } from '../../components/input';
+import Image from 'next/image';
 
 // TODO: Refactor create and edit post pages and endpoints and make them dynamic/reusable
 function CreatePost() {
@@ -22,22 +23,22 @@ function CreatePost() {
     setBlogTitle('');
   }, []);
 
-  // const editor = useEditor({
-  //   extensions: [
-  //     StarterKit,
-  //     Highlight,
-  //     Typography,
-  //     Image,
-  //     TextAlign.configure({
-  //       types: ['heading', 'paragraph'],
-  //     }),
-  //   ],
-  // });
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Highlight,
+      Typography,
+      tiptapImage,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+    ],
+  });
 
   const postBlog = async () => {
     try {
       const res = await axios.post('/api/blog/create-entry', {
-        // entry: editor?.getJSON(),
+        entry: editor?.getJSON(),
         user: session?.user,
         title: blogTitle,
       });
@@ -50,54 +51,16 @@ function CreatePost() {
   const saveBlog = () => {
     postBlog();
     setBlogTitle('');
-    // editor?.commands.clearContent();
+    editor?.commands.clearContent();
   };
 
   const eraseBlog = () => {
     console.log('clicked');
-    // editor?.commands.clearContent();
+    editor?.commands.clearContent();
   };
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBlogTitle(e.target.value);
   };
-
-  //  UPLOAD
-  //////
-
-  const [file, setFile] = useState<any>(null);
-  const [uploadingStatus, setUploadingStatus] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (file) {
-      const uploadedFileDetail = async () => await uploadFile();
-      uploadedFileDetail();
-    }
-    console.log(file);
-  }, [file]);
-
-  const uploadFile = async () => {
-    setUploadingStatus(true);
-    const datePrefix = Date.now();
-    let { data } = await axios.post('/api/s3/upload', {
-      name: `media/${datePrefix}-${file.name}`,
-      type: file.type,
-    });
-
-    const url = data.url;
-    await axios.put(url, file, {
-      headers: {
-        'Content-type': file.type,
-        'Access-Control-Allow-Origin': '',
-      },
-    });
-
-    setUploadingStatus(false);
-    setFile(null);
-  };
-
-  ///////
-
-  // UPLOAD
 
   return (
     <div className={styles.container}>
@@ -110,7 +73,7 @@ function CreatePost() {
             value={blogTitle}
           />
         </Input>
-        {/* <TipTapEdit editor={editor} /> */}
+        <TipTapEdit editor={editor} />
       </div>
       <div>
         <Nav />
@@ -119,16 +82,6 @@ function CreatePost() {
         <button onClick={saveBlog}>Save</button>
         <button onClick={eraseBlog}>Clear</button>
       </div>
-
-      <input
-        type='file'
-        accept='image/*'
-        name='image'
-        id='selectFile'
-        onChange={(e: any) => {
-          setFile(e.target.files[0]);
-        }}
-      />
     </div>
   );
 }
