@@ -4,6 +4,8 @@ import prisma from '../../../lib/prisma';
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		const result = await prisma.blog.findMany({
+			skip: req.body.skip,
+			take: req.body.take,
 			orderBy: [
 				{
 					date: 'desc',
