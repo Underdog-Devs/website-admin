@@ -1,7 +1,34 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import Cors from 'cors';
 import prisma from '../../../lib/prisma';
 
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+const cors = Cors({
+	methods: ['POST', 'GET'],
+});
+
+function runMiddleware(
+	req: NextApiRequest,
+	res: NextApiResponse,
+	fn: Function,
+) {
+	return new Promise((resolve, reject) => {
+		fn(req, res, (result: any) => {
+			if (result instanceof Error) {
+				return reject(result);
+			}
+
+			return resolve(result);
+		});
+	});
+}
+
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse,
+) {
+	// Run the middleware
+	await runMiddleware(req, res, cors);
+
 	try {
 		const result = await prisma.blog.findMany({
 			skip: req.body.skip,
