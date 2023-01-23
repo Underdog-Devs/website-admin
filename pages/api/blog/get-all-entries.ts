@@ -38,6 +38,13 @@ export default async function handler(
 					date: 'desc',
 				},
 			],
+			include: {
+				author: {
+					select: {
+						name: true,
+					},
+				},
+			},
 		});
 		if (result) {
 			res.status(200).json(result);
