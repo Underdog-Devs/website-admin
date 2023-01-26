@@ -3,8 +3,13 @@ import { getSession } from 'next-auth/react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
+import BulletList from '@tiptap/extension-bullet-list';
 import Typography from '@tiptap/extension-typography';
+import CodeBlock from '@tiptap/extension-code-block';
+import Blockquote from '@tiptap/extension-blockquote';
 import Image from '@tiptap/extension-image';
+import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
 import { prisma } from '../../lib/prisma';
@@ -21,6 +26,11 @@ function BlogPost(props: any) {
 			Highlight,
 			Typography,
 			Image,
+			BulletList,
+			OrderedList,
+			CodeBlock,
+			Blockquote,
+			ListItem,
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
 			})],
@@ -33,7 +43,7 @@ function BlogPost(props: any) {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h2>Title: {post.title}</h2>
+				<h2>{post.title}</h2>
 				<p>{post.author.email}</p>
 				<EditorContent editor={editor} />
 				{/* <code>{output}</code> */}

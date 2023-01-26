@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { v4 } from 'uuid';
 import prisma from '../../../lib/prisma';
 import hasUser from '../../../middleware/hasUser';
+
 // pages/api/post/index.ts
 
 // POST /api/post
@@ -10,16 +12,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		console.log('Hey now look at meee! Ishould be in create-entry!');
 		const existingUser = req.body.user;
-		console.log({ existingUser });
 		if (existingUser) {
 			const result = await prisma.blog.create({
 				data: {
+					id: v4(),
 					authorId: existingUser.id,
 					entry: req.body.entry,
 					title: req.body.title,
+					date: new Date(),
+					image: req.body.image,
 				},
 			});
-			console.log({ result });
 			if (result) {
 				res.status(201).json({ message: 'Entry Created' });
 			} else {

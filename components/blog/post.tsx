@@ -21,6 +21,13 @@ function Post(props: any) {
 	const toggleDeleteMessage = () => {
 		setDeleteMessage(!deleteMessage);
 	};
+
+	const dateObj = new Date(post.date);
+	const month = dateObj.getUTCMonth() + 1;
+	const day = dateObj.getUTCDate();
+	const year = dateObj.getUTCFullYear();
+	const newdate = `${year}/${month}/${day}`;
+
 	return (
 		<div className={styles.container}>
 			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
@@ -50,7 +57,7 @@ function Post(props: any) {
 						</a>
 					</li>
 				</ul>
-				<p>Date: {post.date}</p>
+				<p>Date: {newdate}</p>
 			</div>
 		</div>
 	);

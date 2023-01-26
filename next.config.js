@@ -8,7 +8,7 @@ const nextConfig = {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
   images: {
-    domains: ['ud-blog-images.s3.us-east-2.amazonaws.com'],
+    domains: ['ud-media.s3.us-east-2.amazonaws.com'],
     formats: ['image/avif', 'image/webp'],
   },
 };
