@@ -11,6 +11,7 @@ import hasUser from '../../../middleware/hasUser';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		console.log('Hey now look at meee! Ishould be in create-entry!');
+		console.log(req.body);
 		const existingUser = req.body.user;
 		if (existingUser) {
 			const result = await prisma.blog.create({
@@ -19,6 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 					authorId: existingUser.id,
 					entry: req.body.entry,
 					title: req.body.title,
+					firstParagraph: req.body.firstParagraph,
 					date: new Date(),
 					image: req.body.image,
 				},

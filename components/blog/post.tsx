@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './post.module.scss';
@@ -26,38 +27,54 @@ function Post(props: any) {
 	const month = dateObj.getUTCMonth() + 1;
 	const day = dateObj.getUTCDate();
 	const year = dateObj.getUTCFullYear();
-	const newdate = `${year}/${month}/${day}`;
+	const newdate = `${month}/${day}/${year}`;
 
 	return (
 		<div className={styles.container}>
-			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
-			{post.entry.content && post.entry.content[0].content.map((singleContent: { text: any; }) => {
-				return (
-					<div>{singleContent.text}</div>
-				);
-			})}
-			<div className={styles.nav}>
-				<ul>
-					{deleteMessage ? (
-						<><li onClick={deletePost}><a>Yes</a></li>
-							<li onClick={toggleDeleteMessage}><a>No</a></li>
-						</>
-					)
-						: (
+			{post.image
+				?(
+					<img
+						className={styles.img}
+						src={post.image}
+						alt="Featured"
+						loading="lazy"
+					/>
+				)
+				:<Image src="/images/fallback.png" width="313" height="243" />}
+			<div>
+				<Link href={`/blog/${post.id}`}>
+					<h3>{post.title}</h3>
+				</Link>
+				{post.firstParagraph}
+				<div className={styles.nav}>
+					<ul>
+						{deleteMessage ? (
+							<>
+								<li onClick={deletePost}>
+									<a>Yes</a>
+								</li>
+								<li onClick={toggleDeleteMessage}>
+									<a>No</a>
+								</li>
+							</>
+						) : (
 							<li onClick={toggleDeleteMessage}>
 								<a>Delete</a>
 							</li>
 						)}
-					<li>
-						<Link href={`/blog/edit/${post.id}`}><a>Edit</a></Link>
-					</li>
-					<li>
-						<a href={`https://www.underdogdevs.org/blog/${post.id}`}>
-							Read More
-						</a>
-					</li>
-				</ul>
-				<p>Date: {newdate}</p>
+						<li>
+							<Link href={`/blog/edit/${post.id}`}>
+								<a>Edit</a>
+							</Link>
+						</li>
+						<li>
+							<a href={`https://www.underdogdevs.org/blog/${post.id}`}>
+								View Live
+							</a>
+						</li>
+					</ul>
+					<p>Date: {newdate}</p>
+				</div>
 			</div>
 		</div>
 	);

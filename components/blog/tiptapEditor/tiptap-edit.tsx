@@ -249,7 +249,6 @@ type Props = {
 
 function TipTapEdit(props: Props) {
 	const { editor } = props;
-
 	// TODO: Investigate why do we need EditorContent twice - lines 174, 176
 	return (
 		<div className={styles.content}>

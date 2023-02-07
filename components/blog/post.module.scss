@@ -1,37 +1,47 @@
 @import '../../styles/globals.scss';
 
 .container {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 100px 1fr;
 	gap: $space-xs;
 	background-color: rgb(255, 255, 255);
 	border: 1px solid rgb(228, 228, 228);
 	padding: $space-sm $space-md;
 	border-radius: $space-sm;
 	font-family: $primaryTextFont;
-	h3 {
-		font-size: $space-md;
-		cursor: pointer;
+	img {
+		max-width: 80px;
+		height: auto;
 	}
-	a {
-		color: $textBlack;
-		cursor: pointer;
-		text-decoration: underline;
-	}
-	p {
-		line-height: $space-md;
-	}
-	.nav {
+	>div {
 		display: flex;
-		gap: $space-xs;
-		p{
-			font-size: $space-sm;
+		flex-direction: column;
+		gap: 10px;
+		h3 {
+			font-size: $space-md;
+			cursor: pointer;
 		}
-		ul{
+		a {
+			color: $textBlack;
+			cursor: pointer;
+			text-decoration: underline;
+		}
+		p {
+			line-height: $space-md;
+		}
+		.nav {
 			display: flex;
-			gap: $space-md;
-			font-size: $space-sm;
+			gap: $space-xs;
+			p{
+				font-size: $space-sm;
+			}
+			ul{
+				display: flex;
+				gap: $space-md;
+				font-size: $space-sm;
+			}
 		}
 	}
+	
 }
 

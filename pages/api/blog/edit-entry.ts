@@ -22,7 +22,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				data: {
 					authorId: existingUser.id,
 					entry: req.body.entry,
+					firstParagraph: req.body.firstParagraph,
 					title: req.body.title,
+					image: req.body.image,
 				},
 			});
 			console.log({ result });

@@ -7,25 +7,26 @@ import BulletList from '@tiptap/extension-bullet-list';
 import Typography from '@tiptap/extension-typography';
 import CodeBlock from '@tiptap/extension-code-block';
 import Blockquote from '@tiptap/extension-blockquote';
-import Image from '@tiptap/extension-image';
+import { Image as TipTapImage } from '@tiptap/extension-image';
 import ListItem from '@tiptap/extension-list-item';
 import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
+import Image from 'next/image';
 import { prisma } from '../../lib/prisma';
 import Nav from '../../components/dashboard/nav';
-import styles from './index.module.scss';
+import styles from './post.module.scss';
 
 function BlogPost(props: any) {
 	const { post } = props;
-	// const { blogData, setBlogData } = useContext(RootContext);;
 	const editor = useEditor({
 		editable: false,
 		content: post.entry,
-		extensions: [StarterKit,
+		extensions: [
+			StarterKit,
 			Highlight,
 			Typography,
-			Image,
+			TipTapImage,
 			BulletList,
 			OrderedList,
 			CodeBlock,
@@ -33,20 +34,35 @@ function BlogPost(props: any) {
 			ListItem,
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
-			})],
+			}),
+		],
 	});
 
 	if (!editor) {
 		return null;
 	}
-
 	return (
 		<div className={styles.container}>
 			<div>
 				<h2>{post.title}</h2>
+				{post.image ? (
+					<img
+						className={styles.img}
+						src={post.image}
+						alt="Featured"
+						loading="lazy"
+					/>
+				) : (
+					<Image
+						src="/images/fallback.png"
+						width="0"
+						height="0"
+						sizes="100vw"
+						style={{ width: '100%', height: '100px' }}
+					/>
+				)}
 				<p>{post.author.email}</p>
 				<EditorContent editor={editor} />
-				{/* <code>{output}</code> */}
 			</div>
 			<Nav />
 			<Link href="/blog/create">Go to create blog</Link>

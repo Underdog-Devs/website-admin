@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getSession, useSession } from 'next-auth/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -15,17 +15,36 @@ import { RootContext } from '../../../state/RootContext';
 import { prisma } from '../../../lib/prisma';
 
 function EditPost(props: any) {
+	const [file, setFile] = useState<any>(null);
+	// ! FIX THIS
+	// eslint-disable-next-line no-unused-vars
+	const [uploadingStatus, setUploadingStatus] = useState<boolean>(false);
+	const [featuredImage, setFeaturedImage] = useState<string>('');
+	const [firstParagraph, setFirstParagraph] = useState<string>();
+
 	const { post } = props;
 
 	useEffect(() => {
 		setBlogTitle(post.title);
+		if (post.image) {
+			setFeaturedImage(post.image);
+		}
 	}, []);
+
+	useEffect(() => {
+		if (file) {
+			// ! FIX THIS
+			// eslint-disable-next-line no-return-await
+			const uploadedFileDetail = async () => await uploadFile();
+			uploadedFileDetail();
+		}
+	}, [file]);
 
 	const { data: session } = useSession();
 
 	const { blogTitle, setBlogTitle } = useContext(RootContext);
 
-	const editor = useEditor({
+	const tipTapEditor = useEditor({
 		extensions: [
 			StarterKit,
 			Highlight,
@@ -36,6 +55,16 @@ function EditPost(props: any) {
 			}),
 		],
 		content: post?.entry,
+		onUpdate({ editor }) {
+			const paragraph = editor.getJSON().content![0].content![0].text;
+			if (paragraph) {
+				setFirstParagraph(
+					paragraph.length < 180
+						? paragraph.substring(0, 180)
+						: `${paragraph.substring(0, 180)}...`,
+				);
+			}
+		},
 	});
 
 	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +72,15 @@ function EditPost(props: any) {
 	};
 
 	const editBlog = async () => {
-		console.log('editing');
 		try {
 			const res = await axios.post('/api/blog/edit-entry', {
-				entry: editor?.getJSON(),
+				entry: tipTapEditor?.getJSON(),
 				user: session?.user,
 				title: blogTitle,
-				id: post.id });
+				firstParagraph,
+				id: post.id,
+				image: featuredImage,
+			});
 			console.log(res);
 		} catch (error) {
 			console.error(error);
@@ -59,11 +90,39 @@ function EditPost(props: any) {
 	const saveBlog = () => {
 		editBlog();
 		setBlogTitle('');
-		editor?.commands.clearContent();
+		tipTapEditor?.commands.clearContent();
+	};
+
+	const handleUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setFile(event.target.files![0]);
+	};
+
+	const uploadFile = async () => {
+		setUploadingStatus(true);
+		const datePrefix = Date.now();
+		const name = `media/${datePrefix}-${file.name}`;
+
+		const { data } = await axios.post('/api/s3/upload', {
+			name,
+			type: file.type,
+		});
+
+		const { url } = data;
+		// ! FIX THIS
+		// eslint-disable-next-line no-unused-vars
+		const upload = await axios.put(url, file, {
+			headers: {
+				'Content-type': file.type,
+				'Access-Control-Allow-Origin': '',
+			},
+		});
+		setUploadingStatus(false);
+		setFile(null);
+		setFeaturedImage(`${process.env.S3_URL}${name}`);
 	};
 
 	const eraseBlog = () => {
-		editor?.commands.clearContent();
+		tipTapEditor?.commands.clearContent();
 	};
 	return (
 		<div className={styles.container}>
@@ -76,7 +135,16 @@ function EditPost(props: any) {
 						value={blogTitle}
 					/>
 				</Input>
-				<TipTapEdit editor={editor} />
+				<Input labelFor="featured-image" labelText="Featured Image">
+					<input
+						id="featured-image"
+						type="file"
+						accept="image/*"
+						onChange={handleUploadChange}
+					/>
+				</Input>
+				{featuredImage ? <img src={featuredImage} alt="Featured" /> : null}
+				<TipTapEdit editor={tipTapEditor} />
 			</div>
 			<div>
 				<Nav />

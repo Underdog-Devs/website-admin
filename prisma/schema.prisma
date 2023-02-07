@@ -50,5 +50,6 @@ model Blog {
   title    String
 	image    String?
   entry    Json
+	firstParagraph String
   date     DateTime @default(now())
 }

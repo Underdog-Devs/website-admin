@@ -20,22 +20,22 @@ function CreatePost() {
 	// eslint-disable-next-line no-unused-vars
 	const [uploadingStatus, setUploadingStatus] = useState<boolean>(false);
 	const [featuredImage, setFeaturedImage] = useState<string>('');
+	const [firstParagraph, setFirstParagraph] = useState<string>();
 
 	useEffect(() => {
 		if (file) {
-			// ! FIX THIS
-			// eslint-disable-next-line no-return-await
-			const uploadedFileDetail = async () => await uploadFile();
+			const uploadedFileDetail = async () => uploadFile();
 			uploadedFileDetail();
 		}
 	}, [file]);
+
 	const { data: session } = useSession();
 	const { blogTitle, setBlogTitle } = useContext(RootContext);
 	useEffect(() => {
 		setBlogTitle('');
 	}, []);
 
-	const editor = useEditor({
+	const tipTapEditor = useEditor({
 		extensions: [
 			StarterKit,
 			Highlight,
@@ -45,6 +45,17 @@ function CreatePost() {
 				types: ['heading', 'paragraph'],
 			}),
 		],
+		onUpdate({ editor }) {
+			if (!editor.getJSON().content![0].content) return;
+			const paragraph = editor.getJSON().content![0].content![0].text;
+			if (paragraph) {
+				setFirstParagraph(
+					paragraph.length < 180
+						? paragraph.substring(0, 180)
+						: `${paragraph.substring(0, 180)}...`,
+				);
+			}
+		},
 	});
 
 	const postBlog = async () => {
@@ -54,9 +65,10 @@ function CreatePost() {
 		};
 		try {
 			const res = await axios.post('/api/blog/create-entry', {
-				entry: editor?.getJSON(),
+				entry: tipTapEditor?.getJSON(),
 				user,
 				title: blogTitle,
+				firstParagraph,
 				image: featuredImage,
 			});
 			console.log(res);
@@ -68,12 +80,12 @@ function CreatePost() {
 	const publishBlog = () => {
 		postBlog();
 		setBlogTitle('');
-		editor?.commands.clearContent();
+		tipTapEditor?.commands.clearContent();
 	};
 
 	const eraseBlog = () => {
 		console.log('clicked');
-		editor?.commands.clearContent();
+		tipTapEditor?.commands.clearContent();
 	};
 
 	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +97,12 @@ function CreatePost() {
 	};
 
 	const uploadFile = async () => {
+		if (file.size / 1024 > 2048) {
+			// setErrorMsg('File size is greater than maximum limit');
+			// setIsSuccess(false);
+			console.log('FILE TOO LARGE');
+			return;
+		}
 		setUploadingStatus(true);
 		const datePrefix = Date.now();
 		const name = `media/${datePrefix}-${file.name}`;
@@ -93,7 +111,6 @@ function CreatePost() {
 			name,
 			type: file.type,
 		});
-
 		const { url } = data;
 		// ! FIX THIS
 		// eslint-disable-next-line no-unused-vars
@@ -128,7 +145,7 @@ function CreatePost() {
 					/>
 				</Input>
 				{featuredImage ? <img src={featuredImage} alt="Featured" /> : null}
-				<TipTapEdit editor={editor} />
+				<TipTapEdit editor={tipTapEditor} />
 			</div>
 			<div>
 				<Nav />
