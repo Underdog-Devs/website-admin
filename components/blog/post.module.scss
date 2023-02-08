@@ -11,7 +11,6 @@
 	font-family: $primaryTextFont;
 	img {
 		max-width: 80px;
-		height: auto;
 	}
 	>div {
 		display: flex;
@@ -28,18 +27,6 @@
 		}
 		p {
 			line-height: $space-md;
-		}
-		.nav {
-			display: flex;
-			gap: $space-xs;
-			p{
-				font-size: $space-sm;
-			}
-			ul{
-				display: flex;
-				gap: $space-md;
-				font-size: $space-sm;
-			}
 		}
 	}
 	

@@ -253,9 +253,7 @@ function TipTapEdit(props: Props) {
 	return (
 		<div className={styles.content}>
 			<MenuBar editor={editor} />
-			<div>
-				<EditorContent editor={editor} />
-			</div>
+			<EditorContent className={styles.contentContainer} editor={editor} />
 			<EditorContent editor={editor} />
 		</div>
 	);

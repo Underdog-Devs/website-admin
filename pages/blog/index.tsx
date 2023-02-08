@@ -31,7 +31,6 @@ interface BlogPost {
 
 function BlogPosts(props: any) {
 	const { posts } = props;
-	console.log(posts);
 	const {
 		isLoading,
 		loadMoreCallback,

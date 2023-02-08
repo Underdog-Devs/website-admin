@@ -23,7 +23,12 @@
 }
 
 .content {
-	margin: 20px;
+
+  .contentContainer {
+    > div {
+      min-height: 120px;
+    }
+  }
 
 	> * + * {
     margin-top: 0.75em;

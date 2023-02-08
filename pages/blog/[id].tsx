@@ -13,9 +13,46 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaPen } from 'react-icons/fa';
 import { prisma } from '../../lib/prisma';
 import Nav from '../../components/dashboard/nav';
 import styles from './post.module.scss';
+import Details from '../../components/blog/details';
+
+interface SinglePost {
+	id: string;
+	author: string;
+	date: string;
+}
+
+export const details = (singlePost: SinglePost) => {
+	const { id, author, date } = singlePost;
+
+	const fullDate = new Date(date);
+	const month = fullDate.getUTCMonth() + 1;
+	const day = fullDate.getUTCDate();
+	const year = fullDate.getUTCFullYear();
+	const parsedDate = `${month}/${day}/${year}`;
+	return (
+		<div className={styles.details}>
+			<div>
+				<Link href={`edit/${id}`}>
+					<a><FaPen />Edit Post</a>
+				</Link>
+			</div>
+			<div>
+				<span>
+					Written by <span>{author}</span>
+				</span>
+			</div>
+			<div>
+				<span>
+					Posted on <span>{parsedDate}</span>
+				</span>
+			</div>
+		</div>
+	);
+};
 
 function BlogPost(props: any) {
 	const { post } = props;
@@ -38,9 +75,6 @@ function BlogPost(props: any) {
 		],
 	});
 
-	if (!editor) {
-		return null;
-	}
 	return (
 		<div className={styles.container}>
 			<div>
@@ -53,19 +87,13 @@ function BlogPost(props: any) {
 						loading="lazy"
 					/>
 				) : (
-					<Image
-						src="/images/fallback.png"
-						width="0"
-						height="0"
-						sizes="100vw"
-						style={{ width: '100%', height: '100px' }}
-					/>
+					<Image src="/images/fallback.png" width="300" height="240" />
 				)}
-				<p>{post.author.email}</p>
-				<EditorContent editor={editor} />
+				<Details id={post.id} date={post.date} />
+				<EditorContent className={styles.content} editor={editor} />
+				{details(post)}
 			</div>
 			<Nav />
-			<Link href="/blog/create">Go to create blog</Link>
 		</div>
 	);
 }
@@ -91,7 +119,7 @@ export async function getServerSideProps(context: any) {
 		include: {
 			author: {
 				select: {
-					email: true,
+					name: true,
 				},
 			},
 		},
@@ -102,6 +130,7 @@ export async function getServerSideProps(context: any) {
 			post: {
 				...post,
 				date: post?.date.toISOString(),
+				author: post?.author.name,
 			},
 		},
 	};

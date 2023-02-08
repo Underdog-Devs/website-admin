@@ -1,0 +1,21 @@
+@import '../../styles/globals.scss';
+
+.container {
+      display: flex;
+      align-items: flex-start;
+      gap: $space-sm;
+      a {
+            text-decoration: underline;
+            cursor: pointer;
+      }
+      p{
+            font-size: 12px;
+      }
+      ul{
+            display: flex;
+            gap: $space-md;
+            font-size: $space-sm;
+            list-style: none;
+            margin: 0;
+      }
+}

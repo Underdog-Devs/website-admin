@@ -10,13 +10,12 @@ import hasUser from '../../../middleware/hasUser';
 // Optional fields in body: content
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		console.log('Hey now look at meee! Ishould be in create-entry!');
-		console.log(req.body);
 		const existingUser = req.body.user;
+		const id = v4();
 		if (existingUser) {
 			const result = await prisma.blog.create({
 				data: {
-					id: v4(),
+					id,
 					authorId: existingUser.id,
 					entry: req.body.entry,
 					title: req.body.title,
@@ -26,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			});
 			if (result) {
-				res.status(201).json({ message: 'Entry Created' });
+				res.status(201).json({ message: 'Entry Created', id });
 			} else {
 				res.status(500).json({ message: 'Internal Server Error' });
 			}

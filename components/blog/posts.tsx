@@ -33,7 +33,6 @@ function Posts({
 	loadMoreCallback,
 	isLastPage,
 } : Props) {
-	console.log(posts);
 	return (
 		<div className={styles.container}>
 			{posts ? posts.map((post: singlePost, idx: number) => (

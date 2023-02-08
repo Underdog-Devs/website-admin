@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { getSession, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -21,6 +22,7 @@ function CreatePost() {
 	const [uploadingStatus, setUploadingStatus] = useState<boolean>(false);
 	const [featuredImage, setFeaturedImage] = useState<string>('');
 	const [firstParagraph, setFirstParagraph] = useState<string>();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (file) {
@@ -64,27 +66,25 @@ function CreatePost() {
 			id: session?.id,
 		};
 		try {
-			const res = await axios.post('/api/blog/create-entry', {
-				entry: tipTapEditor?.getJSON(),
-				user,
-				title: blogTitle,
-				firstParagraph,
-				image: featuredImage,
-			});
-			console.log(res);
+			await axios
+				.post('/api/blog/create-entry', {
+					entry: tipTapEditor?.getJSON(),
+					user,
+					title: blogTitle,
+					firstParagraph,
+					image: featuredImage,
+				})
+				.then((res) => {
+					if (res.status === 201) {
+						router.push(`/blog/${res.data.id}`);
+					}
+				});
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	const publishBlog = () => {
-		postBlog();
-		setBlogTitle('');
-		tipTapEditor?.commands.clearContent();
-	};
-
 	const eraseBlog = () => {
-		console.log('clicked');
 		tipTapEditor?.commands.clearContent();
 	};
 
@@ -128,30 +128,44 @@ function CreatePost() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<Input labelFor="title" labelText="Title">
-					<input
-						id="title"
-						type="text"
-						onChange={onTitleChange}
-						value={blogTitle}
-					/>
-				</Input>
-				<Input labelFor="featured-image" labelText="Featured Image">
-					<input
-						id="featured-image"
-						type="file"
-						accept="image/*"
-						onChange={handleUploadChange}
-					/>
-				</Input>
-				{featuredImage ? <img src={featuredImage} alt="Featured" /> : null}
+				<div className={styles.topContainer}>
+					<div>
+						<Input labelFor="title" labelText="Title">
+							<input
+								id="title"
+								type="text"
+								className={styles.titleInput}
+								onChange={onTitleChange}
+								value={blogTitle}
+							/>
+						</Input>
+						<Input labelFor="featured-image" labelText="Featured Image">
+							<input
+								id="featured-image"
+								type="file"
+								accept="image/*"
+								onChange={handleUploadChange}
+							/>
+						</Input>
+					</div>
+					<div>
+						{featuredImage ? (
+							<img
+								className={styles.featuredImage}
+								src={featuredImage}
+								alt="Featured"
+							/>
+						) : null}
+					</div>
+				</div>
+
 				<TipTapEdit editor={tipTapEditor} />
 			</div>
 			<div>
 				<Nav />
 			</div>
 			<div>
-				<button onClick={publishBlog}>Publish</button>
+				<button onClick={postBlog}>Publish</button>
 				<button onClick={eraseBlog}>Clear</button>
 			</div>
 		</div>

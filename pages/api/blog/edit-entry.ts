@@ -13,7 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				email: req.body.user.email,
 			},
 		});
-		console.log({ existingUser });
 		if (existingUser) {
 			const result = await prisma.blog.update({
 				where: {
@@ -27,7 +26,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 					image: req.body.image,
 				},
 			});
-			console.log({ result });
 			if (result) {
 				res.status(201).json({ message: 'Entry Updated' });
 			} else {
