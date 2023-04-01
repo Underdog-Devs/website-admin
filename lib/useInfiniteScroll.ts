@@ -48,7 +48,7 @@ export const useInfiniteScroll = (posts: BlogPost[]): UseInfiniteScroll => {
 				loadMoreTimeoutRef.current = setTimeout(() => {
 					axios({
 						method: 'post',
-						url: 'https://middleware-for-blogs.d3k2s157tk6ob5.amplifyapp.com/api/blog/get-all-entries',
+						url: '/api/blog/get-all-entries',
 						headers: {},
 						data: {
 							skip: 6*page, // This is the body part

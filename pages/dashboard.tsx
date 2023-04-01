@@ -2,8 +2,8 @@ import React from 'react';
 import { getSession } from 'next-auth/react';
 import styles from './dashboard.module.scss';
 import Nav from '../components/dashboard/nav';
-import Posts from '../components/blog/posts';
 import prisma from '../lib/prisma';
+import PreviewPosts from '../components/blog/previewPosts';
 
 type Props = {
 	posts: any;
@@ -15,7 +15,9 @@ function Dashboard(props: Props) {
 		<div className={styles.container}>
 			<div className={styles.main}>
 				<div>test</div>
-				<Posts posts={posts} title="Latest Posts" />
+				<PreviewPosts
+					posts={posts}
+				/>
 			</div>
 			<div>
 				<Nav />
