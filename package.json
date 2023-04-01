@@ -29,7 +29,7 @@
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.0",
-    "next": "^12.1.7-canary.7",
+    "next": "^12.3.2",
     "next-auth": "^4.1.2",
     "prosemirror-commands": "^1.5.0",
     "prosemirror-dropcursor": "^1.6.1",
