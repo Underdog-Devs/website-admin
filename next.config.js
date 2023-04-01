@@ -7,6 +7,8 @@ const nextConfig = {
 		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 		SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
 		S3_URL: process.env.S3_URL,
+		S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+		S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
 	},
 	images: {
 		domains: ['ud-media.s3.us-east-2.amazonaws.com'],
