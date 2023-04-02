@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-	res.setHeader('Access-Control-Allow-Origin', ['*', 'https://den-responsive-refactor.d2wd0yag8vomxb.amplifyapp.com']);
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	// another common pattern
 	// res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
 	res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
