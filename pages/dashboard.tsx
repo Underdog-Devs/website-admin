@@ -13,14 +13,14 @@ function Dashboard(props: Props) {
 	const { posts } = props;
 	return (
 		<div className={styles.container}>
+			<div>
+				<Nav />
+			</div>
 			<div className={styles.main}>
-				<div>test</div>
 				<PreviewPosts
 					posts={posts}
 				/>
-			</div>
-			<div>
-				<Nav />
+				<div>{' '}</div>
 			</div>
 		</div>
 	);

@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 			});
 			if (result) {
-				res.status(201).json({ message: 'Entry Updated' });
+				res.status(201).json({ message: 'Entry Updated', id: req.body.id });
 			} else {
 				res.status(500).json({ message: 'Internal Server Error' });
 			}

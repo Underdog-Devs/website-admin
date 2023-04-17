@@ -12,14 +12,17 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 	);
 	try {
 		const result = await prisma.blog.findMany({
+			skip: req.body.skip,
+			take: req.body.take,
 			orderBy: [
 				{
 					date: 'desc',
 				},
 			],
 		});
+		const postCount = await prisma.blog.count();
 		if (result) {
-			res.status(200).json(result);
+			res.status(200).json({ posts: result, count: postCount });
 		} else {
 			res.status(500).json({ message: 'Internal Server Error' });
 		}

@@ -11,12 +11,14 @@ interface Props {
 function Details(props: Props) {
 	const { id, date } = props;
 	const [deleteMessage, setDeleteMessage] = useState(false);
+	const [deleteSuccess, setDeleteSuccess] = useState(false);
 
 	const deletePost = async () => {
 		try {
 			const res = await axios.post('/api/blog/delete', {
 				id,
 			});
+			setDeleteSuccess(true);
 			console.log(res);
 		} catch (error) {
 			console.error(error);
@@ -33,35 +35,34 @@ function Details(props: Props) {
 	const year = fullDate.getUTCFullYear();
 	const postDate = `${month}/${day}/${year}`;
 	return (
-		<div className={styles.container}>
-			<ul>
-				{deleteMessage ? (
-					<>
-						<li onClick={deletePost}>
-							<a>Yes</a>
-						</li>
+		deleteSuccess ? <div style={{ color: 'red', fontSize: 14 }}>Post Deleted</div> : (
+			<div className={styles.container}>
+				<ul>
+					{deleteMessage ? (
+						<>
+							<li onClick={deletePost}>
+								<a>Yes</a>
+							</li>
+							<li onClick={toggleDeleteMessage}>
+								<a>No</a>
+							</li>
+						</>
+					) : (
 						<li onClick={toggleDeleteMessage}>
-							<a>No</a>
+							<a>Delete</a>
 						</li>
-					</>
-				) : (
-					<li onClick={toggleDeleteMessage}>
-						<a>Delete</a>
+					)}
+					<li>
+						<Link href={`/blog/edit/${id}`}>
+							<a>Edit</a>
+						</Link>
 					</li>
-				)}
-				<li>
-					<Link href={`/blog/edit/${id}`}>
-						<a>Edit</a>
-					</Link>
-				</li>
-				<li>
-					<a href={`https://www.underdogdevs.org/blog/${id}`}>View Live</a>
-				</li>
-				<li>
-					<p>Date: {postDate}</p>
-				</li>
-			</ul>
-		</div>
+					<li>
+						<p>{postDate}</p>
+					</li>
+				</ul>
+			</div>
+		)
 	);
 }
 

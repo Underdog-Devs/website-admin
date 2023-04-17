@@ -14,10 +14,10 @@ import TextAlign from '@tiptap/extension-text-align';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaPen } from 'react-icons/fa';
-import { prisma } from '../../lib/prisma';
-import Nav from '../../components/dashboard/nav';
-import styles from './post.module.scss';
-import Details from '../../components/blog/details';
+import { prisma } from '../../../lib/prisma';
+import Nav from '../../../components/dashboard/nav';
+import styles from '../post.module.scss';
+import Details from '../../../components/blog/details';
 
 interface SinglePost {
 	id: string;

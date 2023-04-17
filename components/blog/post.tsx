@@ -22,7 +22,7 @@ function Post(props: any) {
 				)}
 			</div>
 			<div>
-				<Link href={`/blog/${post.id}`}>
+				<Link href={`/blog/${post.title.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\s-]/g, '')}/${post.id}`}>
 					<h3>{post.title}</h3>
 				</Link>
 				{post.firstParagraph}

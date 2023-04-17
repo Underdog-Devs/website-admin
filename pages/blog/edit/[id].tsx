@@ -7,6 +7,7 @@ import Typography from '@tiptap/extension-typography';
 import TextAlign from '@tiptap/extension-text-align';
 import { useEditor } from '@tiptap/react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import TipTapEdit from '../../../components/blog/tiptapEditor/tiptap-edit';
 import styles from './edit.module.scss';
 import Nav from '../../../components/dashboard/nav';
@@ -21,6 +22,7 @@ function EditPost(props: any) {
 	const [uploadingStatus, setUploadingStatus] = useState<boolean>(false);
 	const [featuredImage, setFeaturedImage] = useState<string>('');
 	const [firstParagraph, setFirstParagraph] = useState<string>();
+	const router = useRouter();
 
 	const { post } = props;
 
@@ -56,13 +58,15 @@ function EditPost(props: any) {
 		],
 		content: post?.entry,
 		onUpdate({ editor }) {
-			const paragraph = editor.getJSON().content![0].content![0].text;
-			if (paragraph) {
-				setFirstParagraph(
-					paragraph.length < 180
-						? paragraph.substring(0, 180)
-						: `${paragraph.substring(0, 180)}...`,
-				);
+			if (!editor.getJSON().content) {
+				const paragraph = editor.getJSON().content![0].content![0].text;
+				if (paragraph) {
+					setFirstParagraph(
+						paragraph.length < 180
+							? paragraph.substring(0, 180)
+							: `${paragraph.substring(0, 180)}...`,
+					);
+				}
 			}
 		},
 	});
@@ -81,16 +85,10 @@ function EditPost(props: any) {
 				id: post.id,
 				image: featuredImage,
 			});
-			console.log(res);
+			router.push(`/blog/${res.data.id}`);
 		} catch (error) {
 			console.error(error);
 		}
-	};
-
-	const saveBlog = () => {
-		editBlog();
-		setBlogTitle('');
-		tipTapEditor?.commands.clearContent();
 	};
 
 	const handleUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,7 +148,7 @@ function EditPost(props: any) {
 				<Nav />
 			</div>
 			<div>
-				<button onClick={saveBlog}>Save</button>
+				<button onClick={editBlog}>Save</button>
 				<button onClick={eraseBlog}>Clear</button>
 			</div>
 		</div>
