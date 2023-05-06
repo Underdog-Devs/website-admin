@@ -11,48 +11,11 @@ import { Image as TipTapImage } from '@tiptap/extension-image';
 import ListItem from '@tiptap/extension-list-item';
 import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from '@tiptap/extension-text-align';
-import Link from 'next/link';
 import Image from 'next/image';
-import { FaPen } from 'react-icons/fa';
 import { prisma } from '../../../lib/prisma';
 import Nav from '../../../components/dashboard/nav';
 import styles from '../post.module.scss';
 import Details from '../../../components/blog/details';
-
-interface SinglePost {
-	id: string;
-	author: string;
-	date: string;
-}
-
-export const details = (singlePost: SinglePost) => {
-	const { id, author, date } = singlePost;
-
-	const fullDate = new Date(date);
-	const month = fullDate.getUTCMonth() + 1;
-	const day = fullDate.getUTCDate();
-	const year = fullDate.getUTCFullYear();
-	const parsedDate = `${month}/${day}/${year}`;
-	return (
-		<div className={styles.details}>
-			<div>
-				<Link href={`edit/${id}`}>
-					<a><FaPen />Edit Post</a>
-				</Link>
-			</div>
-			<div>
-				<span>
-					Written by <span>{author}</span>
-				</span>
-			</div>
-			<div>
-				<span>
-					Posted on <span>{parsedDate}</span>
-				</span>
-			</div>
-		</div>
-	);
-};
 
 function BlogPost(props: any) {
 	const { post } = props;
@@ -78,6 +41,9 @@ function BlogPost(props: any) {
 	return (
 		<div className={styles.container}>
 			<div>
+				<Nav />
+			</div>
+			<div>
 				<h2>{post.title}</h2>
 				{post.image ? (
 					<img
@@ -89,11 +55,9 @@ function BlogPost(props: any) {
 				) : (
 					<Image src="/images/fallback.png" width="300" height="240" />
 				)}
-				<Details id={post.id} date={post.date} />
 				<EditorContent className={styles.content} editor={editor} />
-				{details(post)}
+				<Details id={post.id} date={post.date} author={post.author} />
 			</div>
-			<Nav />
 		</div>
 	);
 }

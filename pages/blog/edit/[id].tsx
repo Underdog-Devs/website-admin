@@ -125,6 +125,9 @@ function EditPost(props: any) {
 	return (
 		<div className={styles.container}>
 			<div>
+				<Nav />
+			</div>
+			<div>
 				<Input labelFor="title" labelText="Title">
 					<input
 						id="title"
@@ -143,13 +146,10 @@ function EditPost(props: any) {
 				</Input>
 				{featuredImage ? <img src={featuredImage} alt="Featured" /> : null}
 				<TipTapEdit editor={tipTapEditor} />
-			</div>
-			<div>
-				<Nav />
-			</div>
-			<div>
-				<button onClick={editBlog}>Save</button>
-				<button onClick={eraseBlog}>Clear</button>
+				<div>
+					<button onClick={editBlog}>Save</button>
+					<button onClick={eraseBlog}>Clear</button>
+				</div>
 			</div>
 		</div>
 	);

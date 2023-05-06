@@ -5,7 +5,6 @@
       align-items: flex-start;
       gap: $space-sm;
       a {
-            text-decoration: underline;
             cursor: pointer;
       }
       p{
@@ -17,5 +16,16 @@
             font-size: $space-sm;
             list-style: none;
             margin: 0;
+      }
+      .deleteContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            div {
+                  margin-top: 3px;
+                  display: flex;
+                  width: 100%;
+                  justify-content: space-around;
+            }
       }
 }

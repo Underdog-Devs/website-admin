@@ -39,6 +39,9 @@ export async function getServerSideProps(context: { req: any; }) {
 	}
 	// Fetch all posted jobs and include related items from Company table
 	const posts = await prisma.blog.findMany({
+		where: {
+			authorId: session.id,
+		},
 		take: 3,
 		orderBy: [
 			{

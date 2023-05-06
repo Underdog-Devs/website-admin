@@ -30,16 +30,20 @@ interface BlogPost {
 }
 
 function BlogPosts(props: any) {
-	const { posts } = props;
+	const { posts, authorId } = props;
+
 	const {
 		isLoading,
 		loadMoreCallback,
 		hasDynamicPosts,
 		dynamicPosts,
 		isLastPage,
-	} = useInfiniteScroll(posts);
+	} = useInfiniteScroll(posts, authorId);
 	return (
 		<div className={styles.container}>
+			<div>
+				<Nav />
+			</div>
 			<div>
 				<Posts
 					posts={hasDynamicPosts ? dynamicPosts : posts}
@@ -48,10 +52,10 @@ function BlogPosts(props: any) {
 					isLastPage={isLastPage}
 				/>
 			</div>
-			<Nav />
 		</div>
 	);
 }
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await getSession({ req: context.req });
 	// Redirect if user isn't logged in
@@ -63,9 +67,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			},
 		};
 	}
-
 	// Fetch all posted blogs and include related items author table
 	const posts = await prisma.blog.findMany({
+		where: {
+			authorId: session.id,
+		},
 		take: 6,
 		orderBy: [
 			{
@@ -86,6 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 				...post,
 				date: post.date.toISOString(),
 			})),
+			authorId: session.id,
 		},
 	};
 };

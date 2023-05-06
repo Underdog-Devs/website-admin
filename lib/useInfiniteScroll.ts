@@ -23,7 +23,7 @@ interface BlogPost {
 	entry: any;
 }
 
-export const useInfiniteScroll = (posts: BlogPost[]): UseInfiniteScroll => {
+export const useInfiniteScroll = (posts: BlogPost[], authorId: string): UseInfiniteScroll => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [hasDynamicPosts, setHasDynamicPosts] = useState(false);
@@ -43,16 +43,16 @@ export const useInfiniteScroll = (posts: BlogPost[]): UseInfiniteScroll => {
 			if (target.isIntersecting) {
 				setIsLoading(true);
 				clearTimeout(loadMoreTimeoutRef.current);
-
 				// this timeout debounces the intersection events
 				loadMoreTimeoutRef.current = setTimeout(() => {
 					axios({
 						method: 'post',
-						url: '/api/blog/get-all-entries',
+						url: '/api/blog/authors-posts',
 						headers: {},
 						data: {
 							skip: 6*page, // This is the body part
 							take: 6,
+							authorId,
 						},
 					}).then((resp) => {
 						setPage(page + 1);
