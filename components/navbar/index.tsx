@@ -39,7 +39,7 @@ function NavBar() {
 				</Link>
 				<nav className={styles.navigation}>
 					<div className={styles.navigationLinks}>
-						{session ? (<p onClick={() => signOut({ callbackUrl: process.env.BASE_URL })}>Sign Out</p>) : router.pathname !== '/' && (
+						{session ? (<p onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}>Sign Out</p>) : router.pathname !== '/' && (
 							<Link href="/" passHref>
 								Sign In
 							</Link>

@@ -13,7 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				email: req.body.user.email,
 			},
 		});
-		console.log({ existingUser });
 		if (existingUser) {
 			const result = await prisma.blog.update({
 				where: {
@@ -22,12 +21,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				data: {
 					authorId: existingUser.id,
 					entry: req.body.entry,
+					firstParagraph: req.body.firstParagraph,
 					title: req.body.title,
+					image: req.body.image,
 				},
 			});
-			console.log({ result });
 			if (result) {
-				res.status(201).json({ message: 'Entry Updated' });
+				res.status(201).json({ message: 'Entry Updated', id: req.body.id });
 			} else {
 				res.status(500).json({ message: 'Internal Server Error' });
 			}

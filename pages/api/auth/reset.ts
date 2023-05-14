@@ -9,7 +9,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
 	const emailTokenValid = await new Promise((resolve) => {
 		// Token verification with the help of JWT
-		jwt.verify(token, process.env.JWT_SECRET + email, (err: any) => {
+		jwt.verify(token, process.env.NEXT_PUBLIC_SECRET + email, (err: any) => {
 			if (err) resolve(false);
 			if (!err) resolve(true);
 		});

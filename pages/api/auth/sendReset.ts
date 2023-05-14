@@ -7,7 +7,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 	const { email } = req.body;
 	const { sign } = jwt;
 	// Sign the token with JWT
-	const token = sign({ email }, process.env.JWT_SECRET + email, {
+	const token = sign({ email }, process.env.NEXT_PUBLIC_SECRET + email, {
 		expiresIn: '1d',
 	});
 
@@ -31,12 +31,12 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 				subject: 'Reset Password Request',
 				html: `<div>
                 <p></p>
-                <p><a href="${process.env.BASE_URL}/user/reset-password/${token}">${process.env.BASE_URL}/user/reset-password/${token}</a></p>
+                <p><a href="${process.env.NEXTAUTH_URL}/user/reset-password/${token}">${process.env.NEXTAUTH_URL}/user/reset-password/${token}</a></p>
                 <p></p>
                 <p></p>
                 <hr></hr>
                 <p>To restore access to the site, follow the link.</p>
-                <p><a href="${process.env.BASE_URL}/user/reset-password/${token}">${process.env.BASE_URL}/user/reset-password/${token} </a></p>
+                <p><a href="${process.env.NEXTAUTH_URL}/user/reset-password/${token}">${process.env.NEXTAUTH_URL}/user/reset-password/${token} </a></p>
                 <p>Link is active for 24 hours.</p>
                 <p>If you received this email in error, just delete it.</p>            
                 </div>

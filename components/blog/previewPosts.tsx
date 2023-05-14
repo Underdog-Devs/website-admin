@@ -1,13 +1,8 @@
 import React from 'react';
 import styles from './posts.module.scss';
 import Post from './post';
-import { UseInfiniteScroll } from '../../lib/useInfiniteScroll';
-import { Loader } from './Loader';
 
-type Props = Pick<
-UseInfiniteScroll,
-'isLoading' | 'loadMoreCallback' | 'isLastPage'
-> & {
+type Props = {
 posts: BlogPost[];
 };
 
@@ -27,24 +22,16 @@ type singlePost = {
 	id: string;
 }
 
-function Posts({
+function PreviewPosts({
 	posts,
-	isLoading,
-	loadMoreCallback,
-	isLastPage,
 } : Props) {
 	return (
 		<div className={styles.container}>
 			{posts ? posts.map((post: singlePost, idx: number) => (
 				<Post post={post} key={idx} />
 			)) : <div>loading</div>}
-			<Loader
-				isLoading={isLoading}
-				isLastPage={isLastPage}
-				loadMoreCallback={loadMoreCallback}
-			/>
 		</div>
 	);
 }
 
-export default Posts;
+export default PreviewPosts;

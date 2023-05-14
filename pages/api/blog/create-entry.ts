@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { v4 } from 'uuid';
 import prisma from '../../../lib/prisma';
 import hasUser from '../../../middleware/hasUser';
+
 // pages/api/post/index.ts
 
 // POST /api/post
@@ -8,20 +10,22 @@ import hasUser from '../../../middleware/hasUser';
 // Optional fields in body: content
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		console.log('Hey now look at meee! Ishould be in create-entry!');
 		const existingUser = req.body.user;
-		console.log({ existingUser });
+		const id = v4();
 		if (existingUser) {
 			const result = await prisma.blog.create({
 				data: {
+					id,
 					authorId: existingUser.id,
 					entry: req.body.entry,
 					title: req.body.title,
+					firstParagraph: req.body.firstParagraph,
+					date: new Date(),
+					image: req.body.image,
 				},
 			});
-			console.log({ result });
 			if (result) {
-				res.status(201).json({ message: 'Entry Created' });
+				res.status(201).json({ message: 'Entry Created', id });
 			} else {
 				res.status(500).json({ message: 'Internal Server Error' });
 			}

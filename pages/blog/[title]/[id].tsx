@@ -3,43 +3,61 @@ import { getSession } from 'next-auth/react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
+import BulletList from '@tiptap/extension-bullet-list';
 import Typography from '@tiptap/extension-typography';
-import Image from '@tiptap/extension-image';
+import CodeBlock from '@tiptap/extension-code-block';
+import Blockquote from '@tiptap/extension-blockquote';
+import { Image as TipTapImage } from '@tiptap/extension-image';
+import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
 import TextAlign from '@tiptap/extension-text-align';
-import Link from 'next/link';
-import { prisma } from '../../lib/prisma';
-import Nav from '../../components/dashboard/nav';
-import styles from './index.module.scss';
+import Image from 'next/image';
+import { prisma } from '../../../lib/prisma';
+import Nav from '../../../components/dashboard/nav';
+import styles from '../post.module.scss';
+import Details from '../../../components/blog/details';
 
 function BlogPost(props: any) {
 	const { post } = props;
-	// const { blogData, setBlogData } = useContext(RootContext);;
 	const editor = useEditor({
 		editable: false,
 		content: post.entry,
-		extensions: [StarterKit,
+		extensions: [
+			StarterKit,
 			Highlight,
 			Typography,
-			Image,
+			TipTapImage,
+			BulletList,
+			OrderedList,
+			CodeBlock,
+			Blockquote,
+			ListItem,
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
-			})],
+			}),
+		],
 	});
-
-	if (!editor) {
-		return null;
-	}
 
 	return (
 		<div className={styles.container}>
 			<div>
-				<h2>Title: {post.title}</h2>
-				<p>{post.author.email}</p>
-				<EditorContent editor={editor} />
-				{/* <code>{output}</code> */}
+				<Nav />
 			</div>
-			<Nav />
-			<Link href="/blog/create">Go to create blog</Link>
+			<div>
+				<h2>{post.title}</h2>
+				{post.image ? (
+					<img
+						className={styles.img}
+						src={post.image}
+						alt="Featured"
+						loading="lazy"
+					/>
+				) : (
+					<Image src="/images/fallback.png" width="300" height="240" />
+				)}
+				<EditorContent className={styles.content} editor={editor} />
+				<Details id={post.id} date={post.date} author={post.author} />
+			</div>
 		</div>
 	);
 }
@@ -65,7 +83,7 @@ export async function getServerSideProps(context: any) {
 		include: {
 			author: {
 				select: {
-					email: true,
+					name: true,
 				},
 			},
 		},
@@ -76,6 +94,7 @@ export async function getServerSideProps(context: any) {
 			post: {
 				...post,
 				date: post?.date.toISOString(),
+				author: post?.author.name,
 			},
 		},
 	};

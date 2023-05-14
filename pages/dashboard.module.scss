@@ -2,9 +2,10 @@
 
 .container {
 	display: grid;
-	grid-template-columns: 1fr 180px;
+	grid-template-columns: 180px 1fr;
 	gap: 20px;
 	margin-top: $space-lg;
+	justify-items: center;
 	max-width: 1200px;
 	margin: $space-lg auto 0 auto;
 }

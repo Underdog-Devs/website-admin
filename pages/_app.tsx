@@ -1,4 +1,5 @@
 import { SessionProvider } from 'next-auth/react';
+import { Session } from 'next-auth';
 import type { AppProps } from 'next/app';
 import NavBar from '../components/navbar';
 import { Provider } from '../state/RootContext';
@@ -6,9 +7,14 @@ import { Provider } from '../state/RootContext';
 // styles
 import '../styles/index.scss';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({
+	Component,
+	pageProps,
+}: AppProps<{
+	session: Session;
+}>) {
 	return (
-		<SessionProvider session={session}>
+		<SessionProvider session={pageProps.session}>
 			<Provider>
 				<NavBar />
 				<Component {...pageProps} />

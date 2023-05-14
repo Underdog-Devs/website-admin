@@ -2,11 +2,21 @@
 
 .container {
 	display: grid;
-	grid-template-columns: 1fr 180px;
+	grid-template-columns: 180px 1fr;
 	margin-top: $space-lg;
+	justify-items: center;
 	max-width: 1200px;
 	margin: $space-lg auto 0 auto;
-
+	.topContainer {
+		display: grid;
+		grid-template-columns: 1fr 220px;
+		.titleInput {
+			width: 400px;
+		}
+		.featuredImage {
+			height: 150px;
+		}
+	}
 	// .leftCol {
 	// 	display: flex;
 	// 	align-items: center;
