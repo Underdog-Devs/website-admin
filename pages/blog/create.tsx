@@ -22,7 +22,7 @@ function CreatePost() {
 	const [featuredImage, setFeaturedImage] = useState<string>('');
 	const [firstParagraph, setFirstParagraph] = useState<string>();
 	const [resizedImageFiles, setResizedImageFiles] = useState<any[any]>([]);
-
+	const [uploadMessage, setUploadMessage] = useState<string>('');
 	const router = useRouter();
 
 	const MAX_WIDTH = 500;
@@ -186,9 +186,8 @@ function CreatePost() {
 
 	const uploadMultipleImagesToS3 = async (): Promise<string[]> => {
 		if (resizedImageFiles[0].size / 1024 > 2048) {
-			// setErrorMsg('File size is greater than maximum limit');
-			// setIsSuccess(false);
-			console.log('FILE TOO LARGE');
+			setUploadMessage('File size is greater than maximum limit');
+			return [];
 		}
 		setUploadingStatus(true);
 		const datePrefix = Date.now();
@@ -248,6 +247,7 @@ function CreatePost() {
 								onChange={handleImageChange}
 							/>
 						</Input>
+						{uploadMessage ? <p className={styles.uploadMessage}>{uploadMessage}</p> : null}
 					</div>
 					<div>
 						{featuredImage ? (

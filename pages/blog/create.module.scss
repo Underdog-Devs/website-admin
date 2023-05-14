@@ -16,6 +16,13 @@
 		.featuredImage {
 			height: 150px;
 		}
+		div {
+			.uploadMessage {
+				font-weight: 600;
+				color: $udOrange;
+				margin: $space-sm 0;
+			}
+		}
 	}
 	// .leftCol {
 	// 	display: flex;
