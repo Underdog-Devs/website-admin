@@ -16,12 +16,9 @@ function Dashboard(props: Props) {
 			<div>
 				<Nav />
 			</div>
-			<div className={styles.main}>
-				<PreviewPosts
-					posts={posts}
-				/>
-				<div>{' '}</div>
-			</div>
+			<PreviewPosts
+				posts={posts}
+			/>
 		</div>
 	);
 }
