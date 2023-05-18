@@ -92,6 +92,15 @@ a {
   text-decoration: none;
 }
 
+button {
+  background-color: $udSecondaryOrange;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  color: $udDarkGrey;
+  font-weight: 600;
+}
+
 blockquote {
   background: #f9f9f9;
   border-left: 10px solid #ccc;

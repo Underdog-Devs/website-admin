@@ -228,7 +228,7 @@ function CreatePost() {
 			<div>
 				<Nav />
 			</div>
-			<div>
+			<div className={styles.main}>
 				<div className={styles.topContainer}>
 					<div>
 						<Input labelFor="title" labelText="Title">
@@ -261,9 +261,9 @@ function CreatePost() {
 				</div>
 
 				<TipTapEdit editor={tipTapEditor} />
-				<div>
+				<div className={styles.buttons}>
 					<button onClick={postBlog}>Publish</button>
-					<button onClick={eraseBlog}>Clear</button>
+					<button className={styles.clearButton} onClick={eraseBlog}>Clear</button>
 				</div>
 			</div>
 		</div>

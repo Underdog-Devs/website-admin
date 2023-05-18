@@ -127,28 +127,41 @@ function EditPost(props: any) {
 			<div>
 				<Nav />
 			</div>
-			<div>
-				<Input labelFor="title" labelText="Title">
-					<input
-						id="title"
-						type="text"
-						onChange={onTitleChange}
-						value={blogTitle}
-					/>
-				</Input>
-				<Input labelFor="featured-image" labelText="Featured Image">
-					<input
-						id="featured-image"
-						type="file"
-						accept="image/*"
-						onChange={handleUploadChange}
-					/>
-				</Input>
-				{featuredImage ? <img src={featuredImage} alt="Featured" /> : null}
+
+			<div className={styles.main}>
+				<div className={styles.topContainer}>
+					<div>
+						<Input labelFor="title" labelText="Title">
+							<input
+								id="title"
+								type="text"
+								onChange={onTitleChange}
+								value={blogTitle}
+							/>
+						</Input>
+						<Input labelFor="featured-image" labelText="Featured Image">
+							<input
+								id="featured-image"
+								type="file"
+								accept="image/*"
+								onChange={handleUploadChange}
+							/>
+						</Input>
+					</div>
+					<div>
+						{featuredImage ? (
+							<img
+								className={styles.featuredImage}
+								src={featuredImage}
+								alt="Featured"
+							/>
+						) : null}
+					</div>
+				</div>
 				<TipTapEdit editor={tipTapEditor} />
-				<div>
-					<button onClick={editBlog}>Save</button>
-					<button onClick={eraseBlog}>Clear</button>
+				<div className={styles.buttons}>
+					<button onClick={editBlog}>Publish</button>
+					<button className={styles.clearButton} onClick={eraseBlog}>Clear</button>
 				</div>
 			</div>
 		</div>
