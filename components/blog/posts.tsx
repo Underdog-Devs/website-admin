@@ -9,6 +9,7 @@ UseInfiniteScroll,
 'isLoading' | 'loadMoreCallback' | 'isLastPage'
 > & {
 posts: BlogPost[];
+count: number;
 };
 
 interface BlogPost{
@@ -32,17 +33,21 @@ function Posts({
 	isLoading,
 	loadMoreCallback,
 	isLastPage,
+	count,
 } : Props) {
 	return (
 		<div className={styles.container}>
 			{posts ? posts.map((post: singlePost, idx: number) => (
 				<Post post={post} key={idx} />
 			)) : <div>loading</div>}
-			<Loader
-				isLoading={isLoading}
-				isLastPage={isLastPage}
-				loadMoreCallback={loadMoreCallback}
-			/>
+
+			{count > 6 ?(
+				<Loader
+					isLoading={isLoading}
+					isLastPage={isLastPage}
+					loadMoreCallback={loadMoreCallback}
+				/>
+			) : null}
 		</div>
 	);
 }

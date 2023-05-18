@@ -30,7 +30,7 @@ interface BlogPost {
 }
 
 function BlogPosts(props: any) {
-	const { posts, authorId } = props;
+	const { count, posts, authorId } = props;
 
 	const {
 		isLoading,
@@ -50,6 +50,7 @@ function BlogPosts(props: any) {
 					isLoading={isLoading}
 					loadMoreCallback={loadMoreCallback}
 					isLastPage={isLastPage}
+					count={count}
 				/>
 			</div>
 		</div>
@@ -68,27 +69,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		};
 	}
 	// Fetch all posted blogs and include related items author table
-	const posts = await prisma.blog.findMany({
-		where: {
-			authorId: session.id,
-		},
-		take: 6,
-		orderBy: [
-			{
-				date: 'desc',
+	const response = await prisma.$transaction([
+		prisma.blog.count({
+			where: {
+				authorId: session.id,
 			},
-		],
-		// include: {
-		// 	author: {
-		// 		select: {
-		// 			email: true,
-		// 		},
-		// 	},
-		// },
-	});
+		}),
+		prisma.blog.findMany({
+			where: {
+				authorId: session.id,
+			},
+			take: 6,
+			orderBy: [
+				{
+					date: 'desc',
+				},
+			],
+		}),
+	]);
+
 	return {
 		props: {
-			posts: posts.map((post) => ({
+			count: response[0],
+			posts: response[1].map((post) => ({
 				...post,
 				date: post.date.toISOString(),
 			})),
