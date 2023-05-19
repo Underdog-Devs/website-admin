@@ -10,6 +10,15 @@
   > :nth-child(2) {
     padding: 0 100px;
   }
+  @include for-phone-only {
+    > :nth-child(2) {
+      padding: 20px 20px;
+    }
+		grid-template-columns: 1fr;
+		> :nth-child(1) {
+			display: none;
+		}
+	}
   .details {
     display: flex;
     align-items: flex-end;

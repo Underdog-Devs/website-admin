@@ -225,20 +225,22 @@ function MenuBar(props: MenuProps) {
 			>
 				<FiRefreshCw />
 			</button>
-			<input
-				type="file"
-				accept="image/*"
-				name="image"
-				id="selectFile"
-				ref={hiddenFileInput}
-				onChange={handleUploadChange}
-				style={{ display: 'none' }}
-			/>
-			<label htmlFor="selectFile">
-				<button onClick={handleUploadClick} className={styles.editButton}>
-					<BsImage />
-				</button>
-			</label>
+			<div>
+				<input
+					type="file"
+					accept="image/*"
+					name="image"
+					id="selectFile"
+					ref={hiddenFileInput}
+					onChange={handleUploadChange}
+					style={{ display: 'none' }}
+				/>
+				<label htmlFor="selectFile">
+					<button onClick={handleUploadClick} className={styles.editButton}>
+						<BsImage />
+					</button>
+				</label>
+			</div>
 		</div>
 	);
 }

@@ -1,8 +1,15 @@
+@import '../../../styles/globals.scss';
+
+
 .menu {
 	display: flex;
 	flex-direction: row;
 	border: 1px solid lightgray;
 	border-radius: 5px;
+  @include for-phone-only {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
 }
 .editButton {
 	display: flex;

@@ -32,7 +32,6 @@
   .image {
     cursor: pointer;
     margin-left: $space-xl;
-		padding: 30px 0;
   }
 
   .navigation {
@@ -123,6 +122,21 @@
         &:hover,
         &:focus {
           text-decoration: underline;
+        }
+      }
+
+      .navBlog, .navAccount {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span {
+          color: $udSecondaryOrange;
+        }
+      }
+
+      .navAccount {
+        span {
+          margin-top: 5px;
         }
       }
     }

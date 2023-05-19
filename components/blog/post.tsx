@@ -6,11 +6,11 @@ import styles from './post.module.scss';
 
 function Post(props: any) {
 	const { post } = props;
-	function truncateString(string) {
-		if (string.length > 70) {
-			string = `${string.slice(0, 70)}...`;
+	function truncateString(postTitle: string) {
+		if (postTitle.length > 70) {
+			postTitle = `${postTitle.slice(0, 70)}...`;
 		}
-		return string;
+		return postTitle;
 	}
 
 	return (

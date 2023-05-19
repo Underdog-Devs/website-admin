@@ -68,11 +68,25 @@ function NavBar() {
 					</button>
 				</div>
 				<nav className={styles.mobileNavigation} ref={linksContainerRef}>
-					{session ? (<p onClick={() => signOut()}>Sign Out</p>) : (
-						<Link href="/" passHref>
-							Sign In
-						</Link>
-					)}
+					{session ? (
+						<div className={styles.navBlog}>
+							<span>Blog</span>
+							<Link href="/blog/create" passHref>
+								Create
+							</Link>
+							<Link href="/blog" passHref>
+								View All
+							</Link>
+						</div>
+					) : null}
+					<div className={styles.navAccount}>
+						<span>Account</span>
+						{session ? (<p onClick={() => signOut()}>Sign Out</p>) : (
+							<Link href="/" passHref>
+								Sign In
+							</Link>
+						)}
+					</div>
 				</nav>
 			</div>
 		</div>
