@@ -8,6 +8,13 @@
 	justify-items: center;
 	max-width: 1200px;
 	margin: $space-lg auto 0 auto;
+	@include for-phone-only {
+		grid-template-columns: 1fr;
+		> :nth-child(1) {
+			display: none;
+			
+		}
+	}
 }
 
 .main {
