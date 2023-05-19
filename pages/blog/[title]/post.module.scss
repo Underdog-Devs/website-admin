@@ -1,4 +1,4 @@
-@import '../../styles/globals.scss';
+@import '../../../styles/globals.scss';
 .container {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -7,6 +7,9 @@
   justify-items: center;
   margin: $space-lg auto 0 auto;
   font-family: $primaryTextFont;
+  > :nth-child(2) {
+    padding: 0 100px;
+  }
   .details {
     display: flex;
     align-items: flex-end;
@@ -20,8 +23,12 @@
       }
     }
   }
-  .img {
-    height: 300px;
+  .imgContainer {
+    display: flex;
+    justify-content: center;
+    .img {
+      height: 300px;
+    }
   }
   .content > div{
     border: none;

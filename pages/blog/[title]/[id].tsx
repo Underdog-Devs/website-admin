@@ -14,7 +14,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from 'next/image';
 import { prisma } from '../../../lib/prisma';
 import Nav from '../../../components/dashboard/nav';
-import styles from '../post.module.scss';
+import styles from './post.module.scss';
 import Details from '../../../components/blog/details';
 
 function BlogPost(props: any) {
@@ -45,16 +45,18 @@ function BlogPost(props: any) {
 			</div>
 			<div>
 				<h2>{post.title}</h2>
-				{post.image ? (
-					<img
-						className={styles.img}
-						src={post.image}
-						alt="Featured"
-						loading="lazy"
-					/>
-				) : (
-					<Image src="/images/fallback.png" width="300" height="240" />
-				)}
+				<div className={styles.imgContainer}>
+					{post.image ? (
+						<img
+							className={styles.img}
+							src={post.image}
+							alt="Featured"
+							loading="lazy"
+						/>
+					) : (
+						<Image src="/images/fallback.png" width="300" height="240" />
+					)}
+				</div>
 				<EditorContent className={styles.content} editor={editor} />
 				<Details id={post.id} date={post.date} author={post.author} />
 			</div>

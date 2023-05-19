@@ -6,6 +6,12 @@ import styles from './post.module.scss';
 
 function Post(props: any) {
 	const { post } = props;
+	function truncateString(string) {
+		if (string.length > 70) {
+			string = `${string.slice(0, 70)}...`;
+		}
+		return string;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -23,7 +29,7 @@ function Post(props: any) {
 			</div>
 			<div>
 				<Link href={`/blog/${post.title.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\s-]/g, '')}/${post.id}`}>
-					<h3>{post.title}</h3>
+					<h3>{truncateString(post.title)}</h3>
 				</Link>
 				{post.firstParagraph}
 				<Details id={post.id} date={post.date} />

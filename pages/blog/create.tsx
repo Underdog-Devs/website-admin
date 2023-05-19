@@ -192,13 +192,14 @@ function CreatePost() {
 		}
 		setUploadingStatus(true);
 		const datePrefix = Date.now();
-		const uploadPromises = resizedImageFiles.map(async (imageFile: { name: any; type: any; }) => {
+		const uploadPromises = resizedImageFiles.map(async (imageFile: { name: string; type: any; }) => {
 			const name = `media/${datePrefix}-${imageFile.name}`;
 
 			const { data } = await axios.post('/api/s3/upload', {
 				name,
 				type: imageFile.type,
 			});
+
 			const { url } = data;
 			// ! FIX THIS
 			// eslint-disable-next-line no-unused-vars

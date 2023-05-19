@@ -99,6 +99,7 @@ button {
   padding: 10px 15px;
   color: $udDarkGrey;
   font-weight: 600;
+  cursor: pointer;
 }
 
 blockquote {
@@ -129,4 +130,12 @@ pre {
   background-color: #333333;
 	border-radius: 5px;
   padding: 15px;
+}
+
+
+// Width for the images inside of TipTap editor
+.ProseMirror {
+  img {
+    width: 500px;
+  }
 }

@@ -26,7 +26,7 @@ import axios from 'axios';
 import styles from './tiptap-edit.module.scss';
 
 type MenuProps = {
-  editor: Editor | null;
+	editor: Editor | null;
 };
 
 function MenuBar(props: MenuProps) {
@@ -81,12 +81,12 @@ function MenuBar(props: MenuProps) {
 		});
 		setUploadingStatus(false);
 		setFile(null);
-		// setReturnedUrl();
+
 		editor
 			?.chain()
 			.focus()
 			.setImage({
-				src: `${process.env.S3_URL}${name}`,
+				src: `${process.env.NEXT_PUBLIC_S3_URL}${name}`,
 			})
 			.run();
 	};
@@ -244,7 +244,7 @@ function MenuBar(props: MenuProps) {
 }
 
 type Props = {
-  editor: Editor | null;
+	editor: Editor | null;
 };
 
 function TipTapEdit(props: Props) {
