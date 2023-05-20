@@ -238,7 +238,7 @@ function CreatePost() {
 								type="text"
 								className={styles.titleInput}
 								onChange={onTitleChange}
-								value={blogTitle}
+								value={blogTitle || ''}
 							/>
 						</Input>
 						<Input labelFor="featured-image" labelText="Featured Image">

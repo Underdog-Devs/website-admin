@@ -4,6 +4,8 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	margin-top: $space-lg;
+	grid-gap: 20px;
+	gap: 20px;
 	justify-items: center;
 	max-width: 1200px;
 	margin: $space-lg auto 0 auto;
