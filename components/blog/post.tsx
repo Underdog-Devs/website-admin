@@ -30,26 +30,33 @@ function Post(props: any) {
 
 	return (
 		<div className={styles.container}>
-			<Link href={`/blog/${post.id}`}><h3>{post.title}</h3></Link>
-			{post.entry.content && post.entry.content[0].content.map((singleContent: { text: any; }) => {
-				return (
-					<div>{singleContent.text}</div>
-				);
-			})}
+			<Link href={`/blog/${post.id}`}>
+				<h3>{post.title}</h3>
+			</Link>
+			{post.entry.content
+        && post.entry.content[0].content.map((singleContent: { text: string }) => {
+        	return <div>{singleContent.text}</div>;
+        })}
 			<div className={styles.nav}>
 				<ul>
 					{deleteMessage ? (
-						<><li onClick={deletePost}><a>Yes</a></li>
-							<li onClick={toggleDeleteMessage}><a>No</a></li>
-						</>
-					)
-						: (
-							<li onClick={toggleDeleteMessage}>
-								<a>Delete</a>
+						<>
+							<li onClick={deletePost}>
+								<a>Yes</a>
 							</li>
-						)}
+							<li onClick={toggleDeleteMessage}>
+								<a>No</a>
+							</li>
+						</>
+					) : (
+						<li onClick={toggleDeleteMessage}>
+							<a>Delete</a>
+						</li>
+					)}
 					<li>
-						<Link href={`/blog/edit/${post.id}`}><a>Edit</a></Link>
+						<Link href={`/blog/edit/${post.id}`}>
+							<a>Edit</a>
+						</Link>
 					</li>
 					<li>
 						<a href={`https://www.underdogdevs.org/blog/${post.id}`}>
