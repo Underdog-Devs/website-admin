@@ -57,7 +57,65 @@ function MenuBar(props: MenuProps) {
 	};
 
 	const handleUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setFile(event.target.files![0]);
+		const image = event.target.files![0];
+
+		const x = 600; // Width threshold
+		const y = 400; // Height threshold
+		const maxWidth = 600; // Maximum width after resizing
+		const maxHeight = 400; // Maximum height after resizing
+
+		const imageObject = new Image();
+		imageObject.src = URL.createObjectURL(image);
+
+		imageObject.onload = () => {
+			const { width } = imageObject;
+			const { height } = imageObject;
+			let resizedImage = image;
+
+			if (width > x) {
+				const newWidth = Math.min(maxWidth, width);
+				const ratio = newWidth / width;
+				const newHeight = height * ratio;
+
+				const canvas = document.createElement('canvas');
+				canvas.width = newWidth;
+				canvas.height = newHeight;
+
+				const ctx = canvas.getContext('2d');
+				ctx?.drawImage(imageObject, 0, 0, newWidth, newHeight);
+
+				canvas.toBlob((blob) => {
+					if (blob) {
+						resizedImage = new File([blob], image.name, { type: blob.type });
+					}
+					setFile(resizedImage);
+				}, image.type);
+			}
+
+			if (height > y) {
+				const newHeight = Math.min(maxHeight, height);
+				const ratio = newHeight / height;
+				const newWidth = width * ratio;
+
+				const canvas = document.createElement('canvas');
+				canvas.width = newWidth;
+				canvas.height = newHeight;
+
+				const ctx = canvas.getContext('2d');
+				ctx?.drawImage(imageObject, 0, 0, newWidth, newHeight);
+
+				canvas.toBlob((blob) => {
+					if (blob) {
+						resizedImage = new File([blob], image.name, { type: blob.type });
+					}
+					setFile(resizedImage);
+				}, image.type);
+			}
+
+			if (!(width > x) && !(height > y)) {
+				setFile(resizedImage);
+			}
+		};
 	};
 
 	const uploadFile = async () => {
