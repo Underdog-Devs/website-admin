@@ -85,7 +85,7 @@ function EditPost(props: any) {
 				id: post.id,
 				image: featuredImage,
 			});
-			router.push(`/blog/${res.data.id}`);
+			router.push(`/blog/${blogTitle.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\s-]/g, '')}/${res.data.id}`);
 		} catch (error) {
 			console.error(error);
 		}
