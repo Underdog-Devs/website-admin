@@ -11,7 +11,9 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 	try {
 		const result = await prisma.blog.findMany({
 			where: {
-				authorId: req.body.authorId,
+				author: {
+					name: req.body.postAuthor,
+				},
 			},
 			skip: req.body.skip,
 			take: req.body.take,
